@@ -61,7 +61,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./profile/view.php">
                     <i class='bx bx-user-circle'></i>
                     <span class="text">My Profile</span>
                 </a>
@@ -130,6 +130,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                         <p>My Profile</p>
                     </span>
                 </li>
+
                 <li>
                     <i class='bx bxs-calendar-check'></i>
                     <span class="text">
