@@ -60,6 +60,12 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 						<span class="text">Dashboard</span>
 					</a>
 				</li>
+				<li class="">
+					<a href="./profile/view.php">
+						<i class='bx bxs-dashboard'></i>
+						<span class="text">Profile</span>
+					</a>
+				</li>
 				<li>
 					<a href="./product/index.php">
 						<i class='bx bxl-product-hunt'></i>
