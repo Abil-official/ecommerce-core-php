@@ -113,6 +113,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                     </a>
                 </li>
                 <li class="">
+                    <a href="../profile/view.php">
+                        <i class='bx bxl-product-hunt'></i>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
+                <li class="">
                     <a href="../shop/index.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">Shop</span>
