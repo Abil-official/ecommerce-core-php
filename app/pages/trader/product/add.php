@@ -115,8 +115,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="../shop/index.php">
+                        <i class='bx bxl-product-hunt'></i>
+                        <span class="text">Shop</span>
+                    </a>
+                </li>
                 <li class="active">
-                    <a href="./view.php">
+                    <a href="./list.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">Product</span>
                     </a>

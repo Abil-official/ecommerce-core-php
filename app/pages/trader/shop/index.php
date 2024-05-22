@@ -44,7 +44,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="../product/view.php">
+                    <a href="../product/list.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">Product</span>
                     </a>

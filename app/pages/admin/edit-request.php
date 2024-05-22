@@ -35,7 +35,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     `last_name`='$lastName', `address`='$address', `age`='$age',`gender`='$gender', `user_role`='$role',`address`='$address' WHERE user_id=$id";
                     $query = mysqli_query($con, $insert);
 
-                    if ($con->query($sql) === TRUE) {
+                    if ($con->query($query) === TRUE) {
                         echo "Record updated successfully";
                     } else {
                         echo "Error updating record: " . $con->error;
@@ -99,6 +99,12 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <span class="text">Approval Requests</span>
                     </a>
                 </li>
+                <li>
+					<a href="category/index.php">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Categories</span>
+					</a>
+				</li>
                 <li>
                     <a href="#">
                         <i class='bx bxs-shopping-bag-alt'></i>
