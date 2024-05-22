@@ -120,6 +120,12 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             <div class="head-title">
                 <div class="left">
                     <h1>My Profile</h1>
+                    <?php
+                    if (isset($_SESSION['message']) || !empty($_SESSION['message'])) {
+                        echo '<p class="text-success">' . $_SESSION['message'] . '</p class="text-danger">';
+                        unset($_SESSION['message']);
+                    }
+                    ?>
                     <!-- <ul class="breadcrumb">
                         <h2>Hi (<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>) !</h2>
                     </ul> -->
@@ -200,7 +206,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 </div>
             </div>
             <div>
-                <a href="#" class="btn btn-primary">Edit Profile</a>
+                <a href="./edit.php" class="btn btn-primary">Edit Profile</a>
             </div>
         </main>
 
