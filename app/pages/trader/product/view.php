@@ -82,6 +82,12 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </a>
                 </li>
                 <li class="">
+                    <a href="../profile/view.php">
+                        <i class='bx bxl-product-hunt'></i>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
+                <li class="">
                     <a href="../shop/index.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">Shop</span>
