@@ -73,12 +73,6 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 </a>
             </li>
             <li>
-                <a href="#">
-                    <i class='bx bxs-cog'></i>
-                    <span class="text">Change password</span>
-                </a>
-            </li>
-            <li>
                 <a href="#" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>

@@ -57,13 +57,13 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             </li>
         </ul>
         <ul class="side-menu top">
-            <li class="active">
+            <li class="">
                 <a href="../dashboard.php">
                     <i class='bx bxs-dashboard'></i>
                     <span class="text">Dashboard</span>
                 </a>
             </li>
-            <li>
+            <li class="active">
                 <a href="#">
                     <i class='bx bx-user-circle'></i>
                     <span class="text">My Profile</span>
@@ -73,12 +73,6 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 <a href="#">
                     <i class='bx bxs-shopping-bag-alt'></i>
                     <span class="text">My Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bxs-cog'></i>
-                    <span class="text">Change password</span>
                 </a>
             </li>
             <li>
