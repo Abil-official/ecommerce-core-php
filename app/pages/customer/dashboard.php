@@ -1,3 +1,22 @@
+<?php
+include "../../connection.php";
+session_start();
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+
+    $query = "SELECT * FROM `users` WHERE `email` = '$email'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if ($user['status'] == 'pending') {
+            header("Location: ../auth/login.php");
+
+            exit;
+        }
+    }
+
+}
+// header("Location: ../auth/login.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -94,10 +113,9 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Your Dashboard</h1>
+                    <h1>Welcome to Dashboard</h1>
                     <ul class="breadcrumb">
-                        <h2>Hello (Customer Name) !<br>From account dashboard you can edit your account details, change
-                            account password,view your orders and payments, track reviews and questions.</br></h2>
+                        <h2>Hello (Customer Name) !</h2>
                     </ul>
                 </div>
             </div>
