@@ -155,7 +155,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                     <div class="rounded-t mb-0 px-4 py-3 border-0">
                         <div class="flex flex-wrap items-center">
                             <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                <a href="./add.php" class="btn">Add New Vegetable</a>
+                                <a href="./add.php" class="btn">Add New Product</a>
                             </div>
                         </div>
                     </div>
@@ -164,23 +164,23 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                             <thead>
                                 <tr>
                                     <th
-                                        class="px-6 bg-primary text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         s.n
                                     </th>
                                     <th
-                                        class="px-6 bg-primary text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         name
                                     </th>
                                     <th
-                                        class="px-6 bg-primary text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         price
                                     </th>
                                     <th
-                                        class="px-6 bg-primary text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         quantity
                                     </th>
                                     <th
-                                        class="px-6 bg-primary text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
+                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
                                         action
                                     </th>
                                 </tr>
