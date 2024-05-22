@@ -708,3 +708,8 @@ footer {
 footer p {
     margin-bottom: 10px;
 }
+.disabled{
+    color: red !important;
+    border: 1px solid red;
+    text-transform: capitalize;
+}
