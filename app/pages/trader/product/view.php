@@ -26,18 +26,21 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $query = "
     SELECT 
         products.*, 
-        categories.name as category_name
+        categories.name as category_name,
+        shops.shop_name
     FROM 
         products
     JOIN 
         categories ON products.product_category_id = categories.category_id
+        JOIN 
+        shops ON products.shop_id = shops.shop_id
     WHERE 
         products.product_id = $product_id
 ";
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-
+        var_dump($row);
     } else {
         echo "No vegetable found with this ID.";
         exit;
@@ -224,7 +227,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                 <div class="mt-8 flex justify-between items-center">
                     <span>Price</span>
-                    <span><?php echo $row['price']; ?></span>
+                    <span>Rs.<?php echo $row['price']; ?></span>
                 </div>
                 <!-- <div class="flex justify-between items-center">
                     <span>Selling Price</span>
@@ -236,7 +239,11 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 </div>
                 <div class="flex justify-between items-center">
                     <span>Category</span>
-                    <span><?php echo $row['category_name']; ?></span>
+                    <span><?php echo $row['category_name'] ?? 'NA' ?></span>
+                </div>
+                <div class="flex justify-between items-center">
+                    <span>Shop</span>
+                    <span><?php echo $row['shop_name'] ?? 'NA' ?></span>
                 </div>
                 <div class="flex justify-between items-center border-b-1 pb-8">
                     <span>Stock Check</span>

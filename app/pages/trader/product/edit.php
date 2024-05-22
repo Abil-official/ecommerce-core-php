@@ -4,6 +4,7 @@ session_start();
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
     $categories = null;
+    $shops = null;
     $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
@@ -17,6 +18,11 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $categoryQueryResult = mysqli_query($con, $categoryQuery);
     if ($categoryQueryResult && mysqli_num_rows($categoryQueryResult) > 0) {
         $categories = mysqli_fetch_all($categoryQueryResult, MYSQLI_ASSOC);
+    }
+    $shopQuery = "SELECT * FROM `shops` WHERE `user_id` = '$userID'";
+    $shopQueryResult = mysqli_query($con, $shopQuery);
+    if ($shopQueryResult && mysqli_num_rows($shopQueryResult) > 0) {
+        $shops = mysqli_fetch_all($shopQueryResult, MYSQLI_ASSOC);
     }
 } else {
     header("Location: ../../auth/login.php");
@@ -286,16 +292,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                             </div>
 
                             <div class="w-full">
-                                <p>Shop type <span class="text-red-500">*</span></p>
+                                <p>Shop <span class="text-red-500">*</span></p>
                                 <select name="shop_type"
                                     class="w-full border py-2 px-4 rounded-md text-gray outline-none border-gray-500">
-                                    <option value="">Shop Type</option>
-                                    <option value="1" <?php echo $row['shop_id'] == 1 ? 'selected' : ''; ?>>1
-                                    </option>
-                                    <option value="2" <?php echo $row['shop_id'] == 2 ? 'selected' : ''; ?>>2</option>
-                                    <option value="3" <?php echo $row['shop_id'] == 3 ? 'selected' : ''; ?>>3</option>
-                                    <option value="4" <?php echo $row['shop_id'] == 4 ? 'selected' : ''; ?>>4</option>
-                                    <option value="5" <?php echo $row['shop_id'] == 5 ? 'selected' : ''; ?>>5</option>
+                                    <?php foreach ($shops ?? [] as $shop) {
+                                        ?>
+                                <option value="<?php echo $shop['shop_id']; ?>" 
+                                        <?php if($row['shop_id'] == $shop['shop_id']) { echo ("selected"); } ?>>
+                                                <?php echo $shop['shop_name']; ?>
+                                            </option>
+
+                                    <?php } ?>
                                 </select>
                             </div>
                         </div>

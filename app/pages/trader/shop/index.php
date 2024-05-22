@@ -1,3 +1,35 @@
+<?php
+
+include "../../../connection.php";
+
+session_start();
+
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+    $categories = null;
+    $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if ($user['status'] == 'pending') {
+            header("Location: ../../auth/login.php");
+
+            exit;
+        }
+        $shopQuery = "SELECT * FROM `shops`Where user_id=$userID";
+        $shopQueryResult = mysqli_query($con, $shopQuery);
+
+        if ($shopQueryResult && mysqli_num_rows($shopQueryResult) > 0) {
+            $shop = mysqli_fetch_assoc($shopQueryResult);
+
+        }
+
+    }
+} else {
+    header("Location: ../../auth/login.php");
+    exit;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,11 +76,11 @@
                     </a>
                 </li>
                 <li class="">
-					<a href="../profile/view.php">
-						<i class='bx bxs-dashboard'></i>
-						<span class="text">Profile</span>
-					</a>
-				</li>
+                    <a href="../profile/view.php">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
                 <li>
                     <a href="../product/list.php">
                         <i class='bx bxl-product-hunt'></i>
@@ -124,7 +156,8 @@
 
             <ul class="box-info">
                 <li>
-                    <a class="btn btn-primary" href="setup.php" role="button" style="width: 100%; text-align: center">SetUp Shop</a>
+                    <a class="btn btn-primary" href="setup.php" role="button"
+                        style="width: 100%; text-align: center">SetUp Shop</a>
 
                     <!-- <i class='bx bxs-dollar-circle'></i>
                     <span class="text">
@@ -132,108 +165,39 @@
                         <p>Total Sales</p>
                     </span> -->
                 </li>
-                <li>
-                    <i class='bx bxs-calendar-check'></i>
-                    <span class="text">
-                        <h3>1020</h3>
-                        <p>New Order</p>
-                    </span>
-                </li>
+
             </ul>
 
 
-            <div class="table-data">
+            <div class="table-data" style="grid-template-columns:none">
                 <div class="order">
-                    <div class="head">
-                        <h3>Top Five Traders</h3>
-                    </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>User</th>
-                                <th>Date Order</th>
-                                <th>Payment </th>
-                                <th>Order Status</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <img src="../../../images//user.png">
-                                    <p>Preshna Adhikari</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../../images//user.png">
-                                    <p>Simran Shrestha</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../../images//user.png">
-                                    <p>Riya Shrestha</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status process">Process</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../../images//user.png">
-                                    <p>Anshu Kharel</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../../images//user.png">
-                                    <p>Aseena Subedi</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                        </tbody>
-                    </table>
+                    <h3>Shop Details</h3>
+                    <p>
+                        <b>
+                            Name :
+                        </b>
+                        <?php echo $shop['shop_name'] ?? 'NA' ?>
+                    </p>
+                    <p>
+                        <b>Address :</b>
+                        <?php echo $shop['shop_address'] ?? 'NA' ?>
+                    </p>
+
+                    <p>
+                        <b> Description :</b>
+                        <?php echo $shop['shop_description'] ?? 'NA' ?>
+                    </p>
+                    <p>
+                        <b>
+                            Type :
+                        </b>
+                        <?php echo $shop['shop_type'] ?? 'NA' ?>
+                    </p>
+
+
+
                 </div>
-                <div class="todo">
-                    <div class="head">
-                        <h3>Total Customers</h3>
-                        <i class='bx bx-plus'></i>
-                        <i class='bx bx-filter'></i>
-                    </div>
-                    <ul class="todo-list">
-                        <li class="completed">
-                            <p>Aseena Subedi</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Riya Stha</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Simran Stha</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Anshu Kharel</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Preshna Adhikari</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </main>
         <!-- MAIN -->
