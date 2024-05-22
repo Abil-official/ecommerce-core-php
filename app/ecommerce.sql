@@ -14,7 +14,8 @@ CREATE TABLE USERS (
     phone_no VARCHAR(20),
     gender CHAR(1),
     age INT,
-    password VARCHAR(255)
+    password VARCHAR(255),
+    status VARCHAR(255)   DEFAULT 'pending'
 );
 
 -- COLLECTION_SLOT Table

@@ -15,7 +15,9 @@
 </head>
 
 <body>
+<?php 
 
+?>
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
@@ -35,6 +37,13 @@
 						<span class="text">Dashboard</span>
 					</a>
 				</li>
+				<li>
+					<a href="approval-requests.php">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Approval Requests</span>
+					</a>
+				</li>
+				
 				<li>
 					<a href="#">
 						<i class='bx bxs-shopping-bag-alt'></i>
@@ -251,7 +260,7 @@
 
 
 
-	<script src="script.js"></script>
+	<script src="../../js/script.js"></script>
 </body>
 
 </html>
