@@ -1,3 +1,42 @@
+<?php
+include "../../../connection.php";
+session_start();
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+
+    $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if ($user['status'] == 'pending') {
+            header("Location: ../../auth/login.php");
+
+            exit;
+        }
+    }
+
+} else {
+    header("Location: ../../auth/login.php");
+    exit;
+}
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $product_id = $_GET['id'];
+    $query = "SELECT * FROM `products` WHERE `product_id` = $product_id";
+    $result = mysqli_query($con, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+    } else {
+        echo "No vegetable found with this ID.";
+        exit;
+    }
+} else {
+    echo "Invalid ID.";
+    exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -6,6 +45,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Boxicons -->
+    <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
@@ -18,7 +58,7 @@
 
     <link rel="stylesheet" href="../../../css/global.css">
 
-    <title>Admin Dashboard</title>
+    <title>View Product</title>
 
 
 </head>
@@ -44,7 +84,7 @@
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="./index.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">Product</span>
                     </a>
@@ -74,7 +114,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="../../../logout.php" class="logout">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
@@ -111,51 +151,86 @@
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Lists</h1>
-                    <ul class="breadcrumb">
-                    </ul>
+                    <h1>View Product</h1>
+
                 </div>
             </div>
-            <div class="table-data" style="grid-template-columns: none;">
+            <div class="px-2 mt-6 w-full h-[405px] relative">
+                <!-- <p class="text-gray text-xs">Vegetables</p> -->
+                <h1 class="mt-1 text-2xl"><?php echo $row['product_name']; ?></h1>
 
-                <div class="order">
-                    <div class="head">
-                        <a href="./add.php" class="status completed btn">Add New Product</a>
+                <!-- <div class="mt-2">
+                    <p class="text-gray-400 text-xs">
+                        By <span class="text-green"><?php echo $row['brand_or_producer']; ?></span>
+                    </p>
+                </div> -->
+                <div class="mt-8 flex gap-2">
+
+                    <?php
+
+                    // print_r($row['images'])
+                    $images = json_decode($row['product_image'], true);
+                    if (is_array($images)) {
+                        foreach ($images as $image) {
+
+                            ?>
+                            <div class="w-[120px] h-[120px]">
+                                <img src="<?php echo "../../../" . $image; ?>" alt="" class="h-full w-full" />
+                            </div>
+                            <?php
+                        }
+                    } else {
+                        echo "No images.";
+                    }
+
+                    ?>
+
+
+                    <!-- 
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
                     </div>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>S.N</th>
-                                <th>Product Name</th>
-                                <th>Cost Price</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-
-                            <tr>
-                                <td>
-                                    <img src="../../../images/user.png">
-
-                                </td>
-                                <td>fdsafdsaf</td>
-                                <td>fsdfsafsadf</td>
-                                <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
-                                <td>
-                                    fsdfdf
-                                </td>
-
-
-                            </tr>
-
-
-
-
-
-                        </tbody>
-                    </table>
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
+                    </div>
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
+                    </div> -->
+                </div>
+                <div class="mt-2 flex justify-between items-center border-b-1 pb-8">
+                    <!-- <p class="font-bold text-2xl">£1</p> -->
                 </div>
 
+                <div class="mt-8 flex justify-between items-center">
+                    <span>Price</span>
+                    <span><?php echo $row['price']; ?></span>
+                </div>
+                <!-- <div class="flex justify-between items-center">
+                    <span>Selling Price</span>
+                    <span><?php echo $row['selling_price']; ?></span>
+                </div> -->
+                <div class="flex justify-between items-center">
+                    <span>Quantities</span>
+                    <span><?php echo $row['quantity']; ?></span>
+                </div>
+
+                <div class="flex justify-between items-center border-b-1 pb-8">
+                    <span>Stock Check</span>
+                    <span><?php echo $row['stock_check']; ?></span>
+                </div>
+
+                <div class=" mt-8">
+                    <span>Description</span>
+                    <p class="text-gray-400">
+                        <?php echo $row['product_description']; ?>
+                    </p>
+                </div>
+                <div class=" mt-8">
+                    <span>Allergy Info</span>
+                    <p class="text-gray-400">
+                        <?php echo $row['allergy_info']; ?>
+                    </p>
+                </div>
             </div>
         </main>
         <!-- MAIN -->
