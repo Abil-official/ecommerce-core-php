@@ -4,6 +4,25 @@ include "../../../connection.php";
 
 session_start();
 
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
+
+    $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+        if ($user['status'] == 'pending') {
+            header("Location: ../../auth/login.php");
+
+            exit;
+        }
+    }
+
+} else {
+    header("Location: ../../auth/login.php");
+    exit;
+}
+
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $product_name = mysqli_real_escape_string($con, $_POST['product_name']);
     $stock_check = mysqli_real_escape_string($con, $_POST['stock_check']);
