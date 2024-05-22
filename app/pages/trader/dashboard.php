@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 					</a>
 				</li>
 				<li>
-					<a href="./product/list.php">
+					<a href="./product/index.php">
 						<i class='bx bxl-product-hunt'></i>
 						<span class="text">Product</span>
 					</a>

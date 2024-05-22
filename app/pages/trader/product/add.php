@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     $price = floatval($_POST['price']);
     $product_category_id = intval($_POST['category_id']);
     $quantity = intval($_POST['quantity']);
-    $product_image = json_encode([""]);
+    $product_image = json_encode($_POST['images'] ?? [""]);
     $shop_id = $_POST['shop_type'];
     $allergy_info = mysqli_real_escape_string($con, $_POST['allergy_info']);
     $product_description = mysqli_real_escape_string($con, $_POST['description']);
@@ -59,8 +59,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 
     // insert data into db
-    $insert = "INSERT INTO `products`(`product_name`, `product_description`, `price`, `quantity`, `stock_check`, `allergy_info`, `product_image`, `product_category_id`, `shop_id`) 
-    VALUES ('$product_name','$product_description','$price','$quantity','$stock_check','$allergy_info','$product_image','$product_category_id','$shop_id')";
+    $insert = "INSERT INTO `products`(`product_name`, `product_description`, `price`, `quantity`, `stock_check`, `allergy_info`, `product_image`, `product_category_id`, `shop_id`,`user_id`) 
+    VALUES ('$product_name','$product_description','$price','$quantity','$stock_check','$allergy_info','$product_image','$product_category_id','$shop_id','$userID')";
 
     $query = mysqli_query($con, $insert);
     if ($query) {
@@ -93,9 +93,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 </head>
 
 <body>
-    <?php
-
-    ?>
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">

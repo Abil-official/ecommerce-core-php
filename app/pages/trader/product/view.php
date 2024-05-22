@@ -1,9 +1,6 @@
 <?php
-
 include "../../../connection.php";
-
 session_start();
-
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
 
@@ -22,22 +19,24 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     header("Location: ../../auth/login.php");
     exit;
 }
-if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    if (isset($_GET['id'])) {
-        // Retrieve the ID from the URL
-        $id = $_GET['id'];
-        $query = "SELECT * FROM `products` WHERE `product_id`='$id'";
-        $result = mysqli_query($con, $query);
-        if ($result && mysqli_num_rows($result) > 0) {
-            $product = mysqli_fetch_assoc($result);
-            var_dump($product);
-        }
+
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $product_id = $_GET['id'];
+    $query = "SELECT * FROM `products` WHERE `product_id` = $product_id";
+    $result = mysqli_query($con, $query);
+
+    if ($result && mysqli_num_rows($result) > 0) {
+        $row = mysqli_fetch_assoc($result);
+    } else {
+        echo "No vegetable found with this ID.";
+        exit;
     }
+} else {
+    echo "Invalid ID.";
+    exit;
 }
-
-
-
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,7 +53,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../../../css/admin.css">
     <link rel="stylesheet" href="../../../css/global.css">
 
-    <title>Add New product</title>
+    <title>View Product</title>
+
+
 </head>
 
 <body>
@@ -117,7 +118,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="../../../logout.php" class="logout">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
@@ -154,124 +155,86 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>View <?php echo ($product['product_name']) ?? 'N/A' ?></h1>
-                    <ul class="breadcrumb">
-                    </ul>
+                    <h1>View Product</h1>
+
                 </div>
             </div>
+            <div class="px-2 mt-6 w-full h-[405px] relative">
+                <!-- <p class="text-gray text-xs">Vegetables</p> -->
+                <h1 class="mt-1 text-2xl"><?php echo $row['product_name']; ?></h1>
 
-            <div class="w-full">
+                <!-- <div class="mt-2">
+                    <p class="text-gray-400 text-xs">
+                        By <span class="text-green"><?php echo $row['brand_or_producer']; ?></span>
+                    </p>
+                </div> -->
+                <div class="mt-8 flex gap-2">
 
-                <?php
-
-                if (isset($_SESSION['error'])) {
-                    ?>
-
-                    <h1 class="font-semibold text-xl text-center text-red-500">
-                        <?php echo $_SESSION['error']; ?>
-                    </h1>
-                    <?php
-                    unset($_SESSION['error']);
-                } ?>
-                <div class="mt-4">
                     <?php
 
-                    ?>
+                    // print_r($row['images'])
+                    $images = json_decode($row['product_image'], true);
 
+                    if (is_array($images)) {
+                        foreach ($images as $image) {
 
-                    <div class="mt-3 flex gap-4">
-                        <div class="w-full">
-                            <p>Name <span class="text-red-500">*</span></p>
-                            <input type="text" 
-                                value=" <?php echo ($product['product_name']) ?? 'N/A' ?>" disabled
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-                        <div class="w-full">
-                            <p>Stock Check <span class="text-red-500">*</span></p>
-                            <input type="text" 
-                                value=" <?php echo ($product['stock_check']) ?? 'N/A' ?>" disabled
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-                    </div>
-
-                    <div class="mt-3 flex gap-4">
-                        <div class="w-full">
-                            <p>Cost Price (per unit) <span class="text-red-500">*</span></p>
-                            <input type="text" 
-                                value=" <?php echo ($product['price']) ?? 'N/A' ?>" disabled
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-                        <div class="w-full">
-                            <p>Quantity <span class="text-red-500">*</span></p>
-                            <input type="text" 
-                                value=" <?php echo ($product['quantity']) ?? 'N/A' ?>" disabled
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-                    </div>
-
-                    <div class="mt-3 flex gap-4">
-                        <div class="w-full">
-                            <p>Category Id <span class="text-red-500">*</span></p>
-                            <select name="category_id"
-                                class="w-full border py-2 px-4 rounded-md text-gray outline-none border-gray-500">
-                                <option value="">Category</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-
-                        <div class="w-full">
-                            <p>Shop type <span class="text-red-500">*</span></p>
-                            <select name="shop_type"
-                                class="w-full border py-2 px-4 rounded-md text-gray outline-none border-gray-500">
-                                <option value="">Shop Type</option>
-                                <option value="1">1</option>
-                                <option value="2">2</option>
-                                <option value="3">3</option>
-                                <option value="4">4</option>
-                                <option value="5">5</option>
-                            </select>
-                        </div>
-                    </div>
-
-
-
-
-                    <div class="mt-3">
-                        <p>Description <span class="text-red-500">*</span></p>
-                        <textarea rows="6" name="description" id=""
-                            class="w-full px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none"
-                            disabled
-                            placeholder="Description"><?php echo ($product['product_description']) ?? 'N/A' ?></textarea>
-                    </div>
-
-                    <div class="mt-3">
-                        <p>Allergy Information <span class="text-red-500">*</span></p>
-                        <textarea rows="6" name="allergy_info" id=""
-                            class="w-full px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none"
-                            disabled
-                            placeholder="Allergy Information"><?php echo ($product['allergy_info']) ?? 'N/A' ?></textarea>
-                    </div>
-                    <div class="mt-3 flex gap-4">
-
-                        <div class="w-full">
-                            <p>Image <span class="text-red-500">*</span></p>
+                            ?>
+                            <div class="w-[120px] h-[120px]">
+                                <img src="<?php echo "../../../" . $image; ?>" alt="" class="h-full w-full" />
+                            </div>
                             <?php
-                            foreach (json_decode(($product['product_image'])) ?? [] as $image) {
-                                ?>
-                                <img src="../../../<?php echo ($image) ?>" alt="" srcset=""
-                                    style="height: 100px; object-fit: contain;">
-                            <?php } ?>
+                        }
+                    } else {
+                        echo "No images.";
+                    }
 
-                        </div>
+                    ?>
+
+
+                    <!-- 
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
                     </div>
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
+                    </div>
+                    <div class="w-[120px] h-[120px]">
+                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
+                    </div> -->
+                </div>
+                <div class="mt-2 flex justify-between items-center border-b-1 pb-8">
+                    <!-- <p class="font-bold text-2xl">£1</p> -->
+                </div>
 
+                <div class="mt-8 flex justify-between items-center">
+                    <span>Price</span>
+                    <span><?php echo $row['price']; ?></span>
+                </div>
+                <!-- <div class="flex justify-between items-center">
+                    <span>Selling Price</span>
+                    <span><?php echo $row['selling_price']; ?></span>
+                </div> -->
+                <div class="flex justify-between items-center">
+                    <span>Quantities</span>
+                    <span><?php echo $row['quantity']; ?></span>
+                </div>
 
+                <div class="flex justify-between items-center border-b-1 pb-8">
+                    <span>Stock Check</span>
+                    <span><?php echo $row['stock_check']; ?></span>
+                </div>
 
-
+                <div class=" mt-8">
+                    <span>Description</span>
+                    <p class="text-gray-400">
+                        <?php echo $row['product_description']; ?>
+                    </p>
+                </div>
+                <div class=" mt-8">
+                    <span>Allergy Info</span>
+                    <p class="text-gray-400">
+                        <?php echo $row['allergy_info']; ?>
+                    </p>
                 </div>
             </div>
 

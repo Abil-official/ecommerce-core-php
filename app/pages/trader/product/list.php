@@ -177,7 +177,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                                     <td>
                                         <a href="view.php?id=<?php echo ($product['product_id']) ?>"
                                             style="border: 1px solid green; padding-left:.5em; padding-right:.5em; color:green">View</a>
-                                        <a href="http://"
+                                        <a href="edit.php?id=<?php echo ($product['product_id']) ?>"
                                             style="border: 1px solid blue; padding-left:.5em; padding-right:.5em; color:blue">EDIT</a>
 
                                     </td>
