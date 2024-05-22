@@ -43,6 +43,12 @@
                         <span class="text">Shop</span>
                     </a>
                 </li>
+                <li class="">
+					<a href="../profile/view.php">
+						<i class='bx bxs-dashboard'></i>
+						<span class="text">Profile</span>
+					</a>
+				</li>
                 <li>
                     <a href="../product/list.php">
                         <i class='bx bxl-product-hunt'></i>

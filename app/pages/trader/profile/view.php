@@ -68,12 +68,19 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
+                <li class="">
+                    <a href="../shop/index.php">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Shop</span>
+                    </a>
+                </li>
                 <li class="active">
-					<a href="/">
-						<i class='bx bxs-dashboard'></i>
-						<span class="text">Profile</span>
-					</a>
-				</li>
+                    <a href="/">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
+
                 <li class="">
                     <a href="../product/index.php">
                         <i class='bx bxl-product-hunt'></i>

@@ -22,11 +22,22 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $product_id = $_GET['id'];
-    $query = "SELECT * FROM `products` WHERE `product_id` = $product_id";
+    // $query = "SELECT * FROM `products` WHERE `product_id` = $product_id";
+    $query = "
+    SELECT 
+        products.*, 
+        categories.name as category_name
+    FROM 
+        products
+    JOIN 
+        categories ON products.product_category_id = categories.category_id
+    WHERE 
+        products.product_id = $product_id
+";
     $result = mysqli_query($con, $query);
-
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
+
     } else {
         echo "No vegetable found with this ID.";
         exit;
@@ -178,7 +189,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                     <?php
 
-                    // print_r($row['images'])
                     $images = json_decode($row['product_image'], true);
 
                     if (is_array($images)) {
@@ -224,11 +234,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     <span>Quantities</span>
                     <span><?php echo $row['quantity']; ?></span>
                 </div>
-
+                <div class="flex justify-between items-center">
+                    <span>Category</span>
+                    <span><?php echo $row['category_name']; ?></span>
+                </div>
                 <div class="flex justify-between items-center border-b-1 pb-8">
                     <span>Stock Check</span>
                     <span><?php echo $row['stock_check']; ?></span>
                 </div>
+
 
                 <div class=" mt-8">
                     <span>Description</span>
