@@ -1,0 +1,73 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.banner {
+  width: 100%;
+  max-width: 100%;
+  height: auto; /* This ensures the image maintains its aspect ratio */
+}
+
+/* Media query for laptop screens */
+@media only screen and (min-width: 768px) {
+  .banner {
+    height: 600px; /* Adjust this value as needed for your design */
+  }
+}
+
+#shop {
+  text-align: right;
+}
+
+.card-title {
+  text-align: center;
+}
+
+.card-text {
+  text-align: center;
+}
+
+.view {
+  padding: 5px 40px 5px 40px;
+  border-radius: 20px;
+}
+
+.containers {
+  background-color: #d9d9d9;
+}
+
+.seller {
+  text-align: center;
+  font-size: 30px;
+  font-weight: bold;
+  padding-top: 50px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+.buttons-cart {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+#add-to-cart {
+  border-radius: 20px;
+  color: #5271ff;
+  background-color: white;
+  padding: 10px;
+  font-weight: bold;
+}
+
+#review {
+  background-color: #5271ff;
+  color: white;
+  border-radius: 20px;
+
+  padding: 10px;
+}

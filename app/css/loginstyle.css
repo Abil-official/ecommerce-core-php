@@ -1,0 +1,192 @@
+ 
+   /* Header Styles */
+ /* General Styles */
+body, html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #f7f7f7;
+  }
+  
+  .navigation {
+    position: fixed;
+    margin-top: 2px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* Ensure the navigation is above other content */
+  }
+  .opt{
+    display: flex;
+    flex: 1;
+    padding: 5px;
+    align-items: center;
+    border-radius: 40px;
+    background-color:gainsboro;
+  }
+  .left{
+    flex: 0.8;
+    margin-left: 10px;
+    justify-content: space-between;
+    text-align: left;
+  }
+  .right{
+    flex: 0.8;
+    text-align: right;
+    margin-right: 10px;
+    justify-content: space-between;
+  }
+  .middle{
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .logo{
+    height: 35px;
+    width: auto;
+    border-radius: 10px;
+    text-align: center;
+  }
+  .menu{
+    width: 38px;
+    height: 38px;
+    margin-right: 8px;
+    border-radius: 50%;
+  }
+  .search{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    height: 30px;
+  }
+  .searchbar{
+    flex: 1;
+    height: 32px;
+    border-radius: 32px;
+    border-style: solid;
+  }
+  .searchbar::placeholder{
+    font-size: 20px;
+    padding: 5px;
+  }    
+/* Main Content Styles */
+main {
+    padding-top: 60px; /* Header height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 60px);
+}
+
+.login-container {
+    background: #fff;
+    padding: 40px;
+    margin: 20px;
+    width: 100%;
+    max-width: 400px;  /* Suitable width for better form appearance */
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.form-field {
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.form-field label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.form-field input[type='email'],
+.form-field input[type='password'] {
+    width: 100%;
+    padding: 10px 18px; /* Slightly reduced padding for more internal space */
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+    align-self: flex-end; /* Align button to the right */
+}
+
+.button:hover {
+    background-color: #4cae4c;
+}
+
+/* Form Options */
+.form-options {
+    width: 100%;
+    display: flex;
+    justify-content: space-between; /* Aligns children (checkbox and link) on opposite ends */
+    align-items: center;
+}
+
+.form-options .checkbox-container {
+    margin-left: auto; /* Pushes the checkbox to the right */
+}
+
+.forgot-password {
+    color: #5cb85c;
+    text-decoration: none;
+    cursor: pointer;
+    margin-left: auto;  /* Ensures the link is aligned with the checkbox horizontally */
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.footer{
+    height: 200px;
+    background-color: gray;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .fsection{
+    display: flex;
+    flex-wrap: nowrap;
+    flex:1;
+    height: 170px;
+    gap: 10px;
+  }
+  .fleft{
+    display: flex;
+    flex: 1;
+    align-items: center;
+    background-color: beige;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .fmiddle{
+    display: flex;
+    flex: 1;
+    background-color: beige;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .fright{
+    display: flex;
+    flex: 1;
+    background-color: beige;
+    align-items: center;
+    padding: 10px;
+    border-radius: 20px;
+  }
+  .copyright{
+    text-align: center;
+    margin-top: 10px;
+    font-size: 10px;
+    color: white;
+  }  

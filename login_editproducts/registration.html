@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register</title>
+<link rel="stylesheet" href="registrationstyles.css">
+</head>
+<body>
+
+    <header>
+        <div class="navigation">
+            <div class="opt">
+        
+                <div class= "left">
+                    <img class="menu" src="images/list.png">
+                    <img class="logo" src="images\TSlogo.jpg">
+                </div>
+        
+                <div class="middle">
+                    <div class="search">
+                        <input class="searchbar" type="searchtext" placeholder="Search">
+                        <img class= "menu" src="images/search.png">
+                        </div>
+                </div>
+        
+                <div class="right">
+                    <img class="menu" src="images/image.jpg">
+                    <img class="menu" src="images/image.jpg">
+            </div>
+    
+        </div>
+    </div>
+        <!-- Header content goes here -->
+    </header>
+    
+    <main>
+        <div class="register-container">
+            <form id="registrationForm">
+                <h2>Register</h2>
+                
+                <div class="form-field">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" name="name" placeholder="Name" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Address" required>
+                </div>
+                
+                <div class="form-field">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div class="form-field">
+                    <label for="confirmpassword">Confirm Password</label>
+                    <input type="password" id="confirmPassword" name="confirm_password" placeholder="Confirm Password" required>
+                </div>
+                
+                <div class="form-field">
+
+                    <label for="registerAs">Register As</label>
+                    <select id="register_as" name="register_as">
+                        <option value="customer">Customer</option>
+                        <option value="Admin">Admin</option>
+                        <option value="Trader">Trader</option>
+                       
+                    </select>
+                </div>
+                <div class="form-field">
+                    <label>
+                        <input type="checkbox" id="terms" name="terms" required>
+                        I accept the terms of users & privacy policy
+                    </label>
+                </div>
+                
+                <div class="form-field">
+                    <button type="submit">REGISTER</button>
+                </div>
+                
+                <div class="login-link">
+                    Already registered? <a href="/login.html">Login</a>
+                </div>
+            </form>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer">
+            <div class="fsection">
+                    <div class="fleft">
+                        about us
+                    </div>
+                    <div class="fmiddle">
+                        table
+                    </div>
+                    <div class="fright">
+                        contact
+                    </div>
+                </div>
+                <div class="copyright">
+                    @copyrights
+                </div>
+            </div>
+        </div>
+        <!-- Footer content goes here -->
+    </footer>
+    
+    <script src="scripts.js"></script>
+    </body>
+    </html>                

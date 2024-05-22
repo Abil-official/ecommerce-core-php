@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Product</title>
+    <link rel="stylesheet" href="editproductstyles.css">
+</head>
+<body>
+
+<div class="header">
+    <div class="navigation">
+        <div class="opt">
+    
+            <div class= "left">
+                <img class="menu" src="images/list.png">
+                <img class="logo" src="images\TSlogo.jpg">
+            </div>
+    
+            <div class="middle">
+                <div class="search">
+                    <input class="searchbar" type="searchtext" placeholder="Search">
+                    <img class= "menu" src="images/search.png">
+                    </div>
+            </div>
+    
+            <div class="right">
+                <img class="menu" src="images/image.jpg">
+                <img class="menu" src="images/image.jpg">
+		</div>
+
+	</div>
+</div>
+    
+    <!-- Header content with logo, search bar, cart, and profile icon -->
+</div>
+
+<main class="edit-product-container" style="margin-top:7em;">
+    <h1>Edit Product</h1>
+    <form id="editProductForm" class="product-form">
+        <div class="form-row">
+            <label for="productName">Product Name</label>
+            <input type="text" id="productName" name="productName" required>
+        </div>
+
+        <div class="form-row">
+            <label for="productDescription">Product Description</label>
+            <textarea id="productDescription" name="productDescription" required></textarea>
+        </div>
+
+        <div class="form-row">
+            <label for="availableStock">Available Stock</label>
+            <input type="number" id="availableStock" name="availableStock" required>
+        </div>
+
+        <div class="form-row split">
+            <div>
+                <label for="minPurchaseQty">Minimum Purchase Qty.</label>
+                <input type="number" id="minPurchaseQty" name="minPurchaseQty" required>
+            </div>
+            <div>
+                <label for="maxPurchaseQty">Maximum Purchase Qty.</label>
+                <input type="number" id="maxPurchaseQty" name="maxPurchaseQty" required>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <label for="shop">Shop</label>
+            <select id="shop" name="shop">
+                <option value="">Select shop</option>
+                <!-- Shop options go here -->
+            </select>
+        </div>
+
+        <div class="form-row">
+            <label for="productImage">Product Image</label>
+            <input type="file" id="productImage" name="productImage">
+            <button type="button" onclick="changePicture()">Change Picture</button>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Save changes</button>
+            <button type="button" onclick="deactivateProduct()">Deactivate Product</button>
+            <button type="button" onclick="deleteProduct()">Delete Product</button>
+        </div>
+    </form>
+</main>
+
+
+<footer class="footer" style="margin-top: 60em;">
+    <div class="fsection">
+        <div class="fleft">about us</div>
+        <div class="fmiddle">table</div>
+        <div class="fright">contact</div>
+    </div>
+    <div class="copyright">
+        &copy; 2024 TownSquare Goods
+    </div>
+</footer>
+<script src="scripts.js"></script>
+</body>
+</html>
