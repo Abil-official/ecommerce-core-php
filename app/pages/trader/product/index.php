@@ -136,7 +136,17 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Lists <?php echo $userID; ?></h1>
+                    <h1>Lists </h1>
+                    <?php
+                    if (isset($_SESSION['message'])) {
+                        ?>
+
+                        <h3 class="font-semibold text-xl text-center text-green">
+                            <?php echo $_SESSION['message']; ?>
+                        </h3>
+                        <?php
+                        unset($_SESSION['message']);
+                    } ?>
 
                 </div>
             </div>
@@ -198,7 +208,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 ">
                                                 <?php echo $row['price']; ?>
                                             </td>
-                                          
+
                                             <td
                                                 class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
                                                 <!-- <i class="fas fa-arrow-up text-emerald-500 mr-4"></i> -->
@@ -211,8 +221,8 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                                                         class="fa-solid fa-eye"></i></a>
                                                 <a href="./edit.php?id=<?php echo $row['product_id']; ?>" class="btn"><i
                                                         class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="./delete.php?id=<?php echo $row['product_id']; ?>" class="btn text-red-500"><i
-                                                        class="fa-solid fa-trash"></i></a>
+                                                <a href="./delete.php?id=<?php echo $row['product_id']; ?>"
+                                                    class="btn text-red-500"><i class="fa-solid fa-trash"></i></a>
                                             </td>
                                         </tr>
                                         <?php

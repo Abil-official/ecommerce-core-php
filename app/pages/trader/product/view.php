@@ -170,6 +170,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                     // print_r($row['images'])
                     $images = json_decode($row['product_image'], true);
+
+                print_r($images);
                     if (is_array($images)) {
                         foreach ($images as $image) {
 
