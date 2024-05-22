@@ -25,7 +25,7 @@
         $result = mysqli_query($con, $query);
         if ($result && mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
-            
+
             // Verify the password
             if (password_verify($password, $user['password'])) {
                 var_dump($user);

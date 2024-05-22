@@ -2,8 +2,9 @@
 include "../../connection.php";
 session_start();
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+    $userID = $_SESSION['user_id'];
 
-    $query = "SELECT * FROM `users` WHERE `email` = '$email'";
+    $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
@@ -14,8 +15,10 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         }
     }
 
+} else {
+    header("Location: ../auth/login.php");
+    exit;
 }
-// header("Location: ../auth/login.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -46,7 +49,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             </div>
             <li>
                 <a href="#">
-                    <span class="text">Full Name</span>
+                    <span class="text"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?></span>
                 </a>
             </li>
         </ul>
@@ -115,7 +118,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 <div class="left">
                     <h1>Welcome to Dashboard</h1>
                     <ul class="breadcrumb">
-                        <h2>Hello (Customer Name) !</h2>
+                        <h2>Hi (<?php echo $user['first_name'] . ' ' . $user['last_name']; ?>) !</h2>
                     </ul>
                 </div>
             </div>
