@@ -25,9 +25,14 @@
         $result = mysqli_query($con, $query);
         if ($result && mysqli_num_rows($result) > 0) {
             $user = mysqli_fetch_assoc($result);
-
+            
             // Verify the password
             if (password_verify($password, $user['password'])) {
+                var_dump($user);
+                if ($user['status'] == 'disabled') {
+                    $_SESSION['error'] = "Profile under review";
+                    header("Location: ../auth/login.php");
+                }
                 session_start();
                 $_SESSION['user_id'] = $user['user_id'];
                 $_SESSION['email'] = $user['email'];
