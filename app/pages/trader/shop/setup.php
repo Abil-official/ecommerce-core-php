@@ -83,7 +83,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="index.php">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Shop</span>
                     </a>

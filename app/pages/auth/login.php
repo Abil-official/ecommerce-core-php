@@ -28,7 +28,7 @@
 
             // Verify the password
             if (password_verify($password, $user['password'])) {
-                var_dump($user);
+
                 if ($user['status'] == 'disabled') {
                     $_SESSION['error'] = "Profile under review";
                     header("Location: ../auth/login.php");
@@ -42,6 +42,14 @@
                 $_SESSION['phone'] = $user['phone_no'];
                 $_SESSION['gender'] = $user['gender'];
                 $_SESSION['age'] = $user['age'];
+
+                if ($user['status'] == 'disabled') {
+                    $_SESSION['message'] = "Account is " . $user['status'];
+
+                    exit();
+
+                }
+
                 $_SESSION['message'] = "Login successful!";
                 switch ($user['user_role']) {
                     case 'admin':
@@ -120,6 +128,11 @@
                 <div class="form-field" style="display: flex; justify-content: flex-end;">
                     <button type="submit" class="button" name="login">Login</button>
                 </div>
+                <?php
+                if (isset($_SESSION['message'])) {
+                    echo $_SESSION['message'];
+                }
+                ?>
             </form>
         </div>
     </main>
