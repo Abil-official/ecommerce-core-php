@@ -11,14 +11,14 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     if ($result && mysqli_num_rows($result) > 0) {
         $user = mysqli_fetch_assoc($result);
         if ($user['status'] == 'pending') {
-            header("Location: ../auth/login.php");
+            header("Location: ../../auth/login.php");
 
             exit;
         }
     }
 
 } else {
-    header("Location: ../auth/login.php");
+    header("Location: ../../auth/login.php");
     exit;
 }
 
@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile_update'])) {
                 </a>
             </li>
             <li>
-                <a href="#" class="logout">
+                <a href="../../../logout.php" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>
