@@ -19,11 +19,11 @@
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
-            <img src="logo.jpg">
+            <img src="../../images/logo.jpg">
         </a>
         <ul class="side-menu">
             <div class="profile-logo">
-                <img src="profile.png" alt="Profile">
+                <img src="../../images/profile.png" alt="Profile">
             </div>
             <li>
                 <a href="#">
@@ -48,24 +48,6 @@
                 <a href="#">
                     <i class='bx bxs-shopping-bag-alt'></i>
                     <span class="text">My Order</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bxs-credit-card-alt'></i>
-                    <span class="text">Payment</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-comment-add'></i>
-                    <span class="text">Review</span>
-                </a>
-            </li>
-            <li>
-                <a href="#">
-                    <i class='bx bx-question-mark'></i>
-                    <span class="text">Questions</span>
                 </a>
             </li>
             <li>
@@ -103,7 +85,7 @@
                 <span class="num">3</span>
             </a>
             <a href="#" class="profile">
-                <img src="profile.png">
+                <img src="../../images/profile.png">
             </a>
         </nav>
         <!-- NAVBAR -->
