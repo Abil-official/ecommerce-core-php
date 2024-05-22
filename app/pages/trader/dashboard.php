@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
 	<link rel="stylesheet" href="../../css/admin.css">
 
-	<title>Admin Dashboard</title>
+	<title>Trader Dashboard</title>
 </head>
 
 <body>
@@ -61,9 +61,15 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 					</a>
 				</li>
 				<li class="">
+<<<<<<< HEAD
 					<a href="./profile/view.php">
 						<i class='bx bxs-dashboard'></i>
 						<span class="text">Profile</span>
+=======
+					<a href="shop/index.php">
+						<i class='bx bxs-dashboard'></i>
+						<span class="text">Shop</span>
+>>>>>>> 2f12a153dc77d2b40eb367a114f427d468583902
 					</a>
 				</li>
 				<li>
@@ -134,7 +140,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Admin Dashboard</h1>
+					<h1>Trader Dashboard</h1>
 					<ul class="breadcrumb">
 					</ul>
 				</div>

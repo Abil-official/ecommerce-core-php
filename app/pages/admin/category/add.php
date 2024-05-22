@@ -1,6 +1,9 @@
 <?php
+
 include "../../../connection.php";
+
 session_start();
+
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
 
@@ -10,7 +13,6 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         $user = mysqli_fetch_assoc($result);
         if ($user['status'] == 'pending') {
             header("Location: ../../auth/login.php");
-
             exit;
         }
     }
@@ -20,23 +22,29 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     exit;
 }
 
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $product_id = $_GET['id'];
-    $query = "SELECT * FROM `products` WHERE `product_id` = $product_id";
-    $result = mysqli_query($con, $query);
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
 
-    if ($result && mysqli_num_rows($result) > 0) {
-        $row = mysqli_fetch_assoc($result);
-    } else {
-        echo "No vegetable found with this ID.";
+    $name = $_POST['name'];
+    if (empty($name)) {
+        $_SESSION['error'] = "All field required.";
+
+        header("Location: add.php");
         exit;
     }
-} else {
-    echo "Invalid ID.";
-    exit;
-}
-?>
+    // insert data into db
+    $insert = "INSERT INTO `categories`(`name`)  VALUES ('$name')";
 
+    $query = mysqli_query($con, $insert);
+    if ($query) {
+        $_SESSION['message'] = "Created Successfully";
+        header("Location: index.php");
+        exit();
+    } else {
+        echo '<script>alert("Something went wrong!");</script>';
+    }
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -53,9 +61,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <link rel="stylesheet" href="../../../css/admin.css">
     <link rel="stylesheet" href="../../../css/global.css">
 
-    <title>View Product</title>
-
-
+    <title>Add New product</title>
 </head>
 
 <body>
@@ -118,7 +124,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="../../../logout.php" class="logout">
+                    <a href="#" class="logout">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
@@ -155,86 +161,43 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>View Product</h1>
-
+                    <h1>Add Category</h1>
+                    <ul class="breadcrumb">
+                    </ul>
                 </div>
             </div>
-            <div class="px-2 mt-6 w-full h-[405px] relative">
-                <!-- <p class="text-gray text-xs">Vegetables</p> -->
-                <h1 class="mt-1 text-2xl"><?php echo $row['product_name']; ?></h1>
 
-                <!-- <div class="mt-2">
-                    <p class="text-gray-400 text-xs">
-                        By <span class="text-green"><?php echo $row['brand_or_producer']; ?></span>
-                    </p>
-                </div> -->
-                <div class="mt-8 flex gap-2">
+            <div class="w-full">
 
+                <?php
+
+                if (isset($_SESSION['error'])) {
+                    ?>
+
+                    <h1 class="font-semibold text-xl text-center text-red-500">
+                        <?php echo $_SESSION['error']; ?>
+                    </h1>
                     <?php
-
-                    // print_r($row['images'])
-                    $images = json_decode($row['product_image'], true);
-
-                    if (is_array($images)) {
-                        foreach ($images as $image) {
-
-                            ?>
-                            <div class="w-[120px] h-[120px]">
-                                <img src="<?php echo "../../../" . $image; ?>" alt="" class="h-full w-full" />
-                            </div>
-                            <?php
-                        }
-                    } else {
-                        echo "No images.";
-                    }
+                    unset($_SESSION['error']);
+                } ?>
+                <div class="mt-4">
+                    <?php
 
                     ?>
 
-
-                    <!-- 
-                    <div class="w-[120px] h-[120px]">
-                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
-                    </div>
-                    <div class="w-[120px] h-[120px]">
-                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
-                    </div>
-                    <div class="w-[120px] h-[120px]">
-                        <img src="../image/categories/1691421065.jpg" alt="" class="h-full w-full" />
-                    </div> -->
-                </div>
-                <div class="mt-2 flex justify-between items-center border-b-1 pb-8">
-                    <!-- <p class="font-bold text-2xl">£1</p> -->
-                </div>
-
-                <div class="mt-8 flex justify-between items-center">
-                    <span>Price</span>
-                    <span><?php echo $row['price']; ?></span>
-                </div>
-                <!-- <div class="flex justify-between items-center">
-                    <span>Selling Price</span>
-                    <span><?php echo $row['selling_price']; ?></span>
-                </div> -->
-                <div class="flex justify-between items-center">
-                    <span>Quantities</span>
-                    <span><?php echo $row['quantity']; ?></span>
-                </div>
-
-                <div class="flex justify-between items-center border-b-1 pb-8">
-                    <span>Stock Check</span>
-                    <span><?php echo $row['stock_check']; ?></span>
-                </div>
-
-                <div class=" mt-8">
-                    <span>Description</span>
-                    <p class="text-gray-400">
-                        <?php echo $row['product_description']; ?>
-                    </p>
-                </div>
-                <div class=" mt-8">
-                    <span>Allergy Info</span>
-                    <p class="text-gray-400">
-                        <?php echo $row['allergy_info']; ?>
-                    </p>
+                    <form action="" method="post" class="px-2">
+                        <div class="mt-3 flex gap-4">
+                            <div class="w-full">
+                                <p>Name <span class="text-red-500">*</span></p>
+                                <input type="text" placeholder="Category Name" name="name"
+                                    class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                            </div>
+                        </div>
+                        <input type="submit"
+                            class="bg-primary font-semibold text-white w-full py-2 mt-4 text-center rounded-md"
+                            value="submit" name="submit">
+                        </input>
+                    </form>
                 </div>
             </div>
 

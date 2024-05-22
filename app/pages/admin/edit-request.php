@@ -8,8 +8,6 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         // Retrieve the ID from the URL
         $id = $_GET['id'];
         settype($id, "integer");
-        // Do something with the ID, such as display it
-
         // Prepare the SQL query using prepared statement
         $query = "SELECT * FROM `users` WHERE `user_id`=?";
         if ($stmt = mysqli_prepare($con, $query)) {
@@ -22,10 +20,6 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
 
                 // Fetch result as an associative array
                 $user = mysqli_fetch_assoc($result);
-
-
-
-
                 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                     // Update query with prepared statement
                     $firstName = $_POST['first_name'];
@@ -37,9 +31,11 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     $role = $_POST['role'];
                     $status = $_POST['status'];
 
-                    $sql = "UPDATE users SET first_name='$firstName',`status` = '$status',
+                    $insert = "UPDATE users SET first_name='$firstName',`status` = '$status',
                     `last_name`='$lastName', `address`='$address', `age`='$age',`gender`='$gender', `user_role`='$role',`address`='$address' WHERE user_id=$id";
-                    if ($con->query($sql) === TRUE) {
+                    $query = mysqli_query($con, $insert);
+
+                    if ($con->query($query) === TRUE) {
                         echo "Record updated successfully";
                     } else {
                         echo "Error updating record: " . $con->error;
@@ -48,7 +44,6 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     // Handle execution error
                     echo "Error executing query: " . mysqli_error($con);
                 }
-
                 // Close statement
                 mysqli_stmt_close($stmt);
             }
@@ -56,8 +51,6 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         } else {
             echo "ID parameter is missing in the URL";
         }
-
-
     }
 }
 ?>
@@ -106,6 +99,12 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <span class="text">Approval Requests</span>
                     </a>
                 </li>
+                <li>
+					<a href="category/index.php">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Categories</span>
+					</a>
+				</li>
                 <li>
                     <a href="#">
                         <i class='bx bxs-shopping-bag-alt'></i>

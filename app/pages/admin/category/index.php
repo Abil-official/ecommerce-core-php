@@ -1,6 +1,13 @@
 <?php
 session_start();
-include "../../connection.php";
+include "../../../connection.php";
+if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+    $query = "SELECT * FROM `categories`";
+    // Execute the query
+    $result = mysqli_query($con, $query);
+
+    $categories = mysqli_fetch_all($result, MYSQLI_ASSOC);
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,44 +20,12 @@ include "../../connection.php";
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
     <!-- My CSS -->
 
-    <link rel="stylesheet" href="../../css/admin">
+    <link rel="stylesheet" href="../../../css/admin">
 
-    <title>Approval Requests</title>
+    <title>Categories</title>
 </head>
 
 <body>
-    <?php
-    $disabledUserCount = null;
-    $approvedUserCount = null;
-    $pendingUserCount = null;
-    $allUsers = null;
-    if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-        // Query to get the count of disabled users
-        $query = "SELECT * FROM `users` WHERE `status` = 'disabled'";
-        // Execute the query
-        $result = mysqli_query($con, $query);
-        // Fetch the count result
-        $disabledUserCount = mysqli_num_rows($result);
-        // Query to get the count of approved users
-        $query = "SELECT * FROM `users` WHERE `status` = 'approved'";
-        // Execute the query
-        $result = mysqli_query($con, $query);
-        // Fetch the count result
-        $approvedUserCount = mysqli_num_rows($result);
-        // Query to get the count of pending users
-        $query = "SELECT * FROM `users` WHERE `status` = 'pending'";
-        // Execute the query
-        $result = mysqli_query($con, $query);
-        // Fetch the count result
-        $pendingUserCount = mysqli_num_rows($result);
-        // Query to get all users
-        $query = "SELECT * FROM `users`";
-        // Execute the query
-        $result = mysqli_query($con, $query);
-
-        $allUsers = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    }
-    ?>
 
     <!-- SIDEBAR -->
     <section id="sidebar">
@@ -66,23 +41,23 @@ include "../../connection.php";
             </li>
             <ul class="side-menu top">
                 <li class="">
-                    <a href="index.php">
+                    <a href="../index.php">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="approval-requests.php">
+                <li>
+                    <a href="../approval-requests.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Approval Requests</span>
                     </a>
                 </li>
-                <li>
-					<a href="category/index.php">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Categories</span>
-					</a>
-				</li>
+                <li class="active">
+                    <a href="#">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Categories</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#">
                         <i class='bx bxs-shopping-bag-alt'></i>
@@ -146,9 +121,6 @@ include "../../connection.php";
             </ul>
     </section>
     <!-- SIDEBAR -->
-
-
-
     <!-- CONTENT -->
     <section id="content">
         <!-- NAVBAR -->
@@ -175,88 +147,57 @@ include "../../connection.php";
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Approval Requests</h1>
+                    <h1>Category</h1>
                     <ul class="breadcrumb">
                     </ul>
                 </div>
             </div>
 
-            <ul class="box-info">
-
-                <li>
-                    <i class='bx bx-user-circle'></i>
-                    <span class="text">
-                        <h3><?php echo ($approvedUserCount) ?></h3>
-                        <p>Approved</p>
-                    </span>
-                </li>
-
-                <li>
-                    <i class='bx bx-user-circle'></i>
-                    <span class="text">
-                        <h3><?php echo ($disabledUserCount) ?></h3>
-                        <p>Disabled</p>
-                    </span>
-                </li>
-                <li>
-                    <i class='bx bx-user-circle'></i>
-                    <span class="text">
-                        <h3><?php
-                        echo ($pendingUserCount)
-                            ?></h3>
-                        <p>Pending</p>
-                    </span>
+            <ul class="box-info" style="grid-template-columns:none">
+                <li style="justify-content: center;">
+                    <a href="add.php"> <span class="text text-center">
+                            Add
+                        </span></a>
                 </li>
             </ul>
 
 
-            <div class="table-data" style="grid-template-columns: none;">
-                <div class="order">
-                    <div class="head">
-                        <h3></h3>
-                    </div>
+            <div class="table-data" style="grid-template-columns:none">
+                <div class="order" style="width:100%">
                     <table>
                         <thead>
                             <tr>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>User Type </th>
-                                <th>Approval Status</th>
+                                <th>S.No</th>
+                                <th>Name</th>
+                                <th>Action</th>
+
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            foreach ($allUsers ?? [] as $user) {
+                            foreach ($categories ?? [] as $key => $category) {
                                 ?>
-
                                 <tr>
-
                                     <td>
-                                        <img src="../../images/user.png">
-                                        <a href="edit-request.php?id=<?php echo ($user['user_id']) ?>">
-                                            <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
-                                        </a>
+                                        <?php
+                                        echo $key + 1;
+                                        ?>
                                     </td>
-                                    <td><?php echo $user['email'] ?></td>
-                                    <td><?php echo $user['user_role'] ?></td>
-                                    <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
-                                    <td><span
-                                            class="status <?php echo $user['status'] ?>"><?php echo $user['status'] ?></span>
+                                    <td>
+                                        <p><?php echo ($category['name']) ?></p>
                                     </td>
+                                    <td>
 
-
+                                        <a href="edit.php?id=<?php echo ($category['category_id']) ?>"
+                                            style="border:1px solid red; padding-left: .5em; padding-right: .5em; color:red">Edit</a>
+                                    </td>
                                 </tr>
-
-                                <?php
-                            }
-                            ?>
-
+                            <?php } ?>
 
 
                         </tbody>
                     </table>
                 </div>
-
             </div>
         </main>
         <!-- MAIN -->
