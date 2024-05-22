@@ -15,22 +15,22 @@
 </head>
 
 <body>
-<?php 
+	<?php
 
-?>
+	?>
 	<!-- SIDEBAR -->
 	<section id="sidebar">
 		<a href="#" class="brand">
 			<img src="../../images/logo.jpg">
 		</a>
 		<ul class="side-menu ">
-			<li>
-				<a href="#">
-					<i class='bx bxs-home'></i>
-					<span class="text">Home</span>
-				</a>
-			</li>
 			<ul class="side-menu top">
+				<li>
+					<a href="#">
+						<i class='bx bxs-home'></i>
+						<span class="text">Home</span>
+					</a>
+				</li>
 				<li class="active">
 					<a href="#">
 						<i class='bx bxs-dashboard'></i>
@@ -38,34 +38,15 @@
 					</a>
 				</li>
 				<li>
-					<a href="approval-requests.php">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Approval Requests</span>
-					</a>
-				</li>
-				
-				<li>
-					<a href="#">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">View Order</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Edit Order</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
+					<a href="./product/view.php">
 						<i class='bx bxl-product-hunt'></i>
-						<span class="text">View all Product</span>
+						<span class="text">Product</span>
 					</a>
 				</li>
 				<li>
 					<a href="#">
-						<i class='bx bxl-product-hunt'></i>
-						<span class="text">Edit all Product</span>
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Order</span>
 					</a>
 				</li>
 				<li>
@@ -78,18 +59,6 @@
 					<a href="#">
 						<i class='bx bx-comment-add'></i>
 						<span class="text">Review</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class='bx bx-question-mark'></i>
-						<span class="text">Query</span>
-					</a>
-				</li>
-				<li>
-					<a href="#">
-						<i class='bx bxs-user-rectangle'></i>
-						<span class="text">View all Traders</span>
 					</a>
 				</li>
 				<li>
@@ -215,7 +184,7 @@
 								<td>
 									<img src="../../images/user.png">
 									<p>Aseena Subedi</p>
-									<j /td>
+								</td>
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status completed">Completed</span></td>
