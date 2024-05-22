@@ -13,7 +13,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     $result = mysqli_query($con, $query);
 
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    var_dump($products);
+
 }
 
 ?>

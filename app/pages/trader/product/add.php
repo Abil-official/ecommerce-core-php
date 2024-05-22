@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
-
+    $categories = null;
     $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
@@ -16,8 +16,13 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
             exit;
         }
-    }
+        $categoryQuery = "SELECT * FROM `categories`";
+        $categoryQueryResult = mysqli_query($con, $categoryQuery);
+        if ($categoryQueryResult && mysqli_num_rows($categoryQueryResult) > 0) {
+            $categories = mysqli_fetch_all($categoryQueryResult, MYSQLI_ASSOC);
+        }
 
+    }
 } else {
     header("Location: ../../auth/login.php");
     exit;
@@ -242,12 +247,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                                 <p>Category Id <span class="text-red-500">*</span></p>
                                 <select name="category_id"
                                     class="w-full border py-2 px-4 rounded-md text-gray outline-none border-gray-500">
-                                    <option value="">Category</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
+                                    <?php
+                                    foreach ($categories ?? [] as $category) {
+                                        ?>
+                                        <option value="<?php echo ($category['category_id']) ?>">
+                                            <?php echo ($category['name']) ?>
+                                        </option>
+                                    <?php } ?>
+
+
                                 </select>
                             </div>
 
