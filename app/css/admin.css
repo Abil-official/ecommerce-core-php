@@ -713,3 +713,46 @@ footer p {
     border: 1px solid red;
     text-transform: capitalize;
 }
+.form-field {
+    margin-bottom: 1rem;
+  }
+  
+  .form-field label {
+    display: block;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-field input[type='text'],
+  .form-field input[type='email'],
+  .form-field input[type='password'],
+  .form-field select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .form-field button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #5cb85c;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .form-field button:hover {
+    background-color: #4cae4c;
+  }
+  .approved{
+    color: green !important;
+    border: 1px solid green;
+    text-transform: capitalize;
+}
+  .pending{
+    color: var(--blue) !important;
+    border: 1px solid var(--blue);
+    text-transform: capitalize;
+}

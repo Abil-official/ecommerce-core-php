@@ -47,13 +47,9 @@ include "../../connection.php";
         $query = "SELECT * FROM `users`";
         // Execute the query
         $result = mysqli_query($con, $query);
-        // Fetch the count result
-        $allUsers = array(mysqli_fetch_assoc($result));
-        var_dump($allUsers);
-
-
+       
+        $allUsers = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
-
     ?>
 
     <!-- SIDEBAR -->
@@ -69,13 +65,13 @@ include "../../connection.php";
                 </a>
             </li>
             <ul class="side-menu top">
-                <li class="active">
-                    <a href="#">
+                <li class="">
+                    <a href="index.php">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="approval-requests.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Approval Requests</span>
@@ -226,10 +222,14 @@ include "../../connection.php";
                             <?php
                             foreach ($allUsers ?? [] as $user) {
                                 ?>
+
                                 <tr>
+
                                     <td>
                                         <img src="../../images/user.png">
-                                        <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
+                                        <a href="edit-request.php?id=<?php echo ($user['user_id']) ?>">
+                                            <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
+                                        </a>
                                     </td>
                                     <td><?php echo $user['email'] ?></td>
                                     <td><?php echo $user['user_role'] ?></td>
@@ -237,7 +237,10 @@ include "../../connection.php";
                                     <td><span
                                             class="status <?php echo $user['status'] ?>"><?php echo $user['status'] ?></span>
                                     </td>
+
+
                                 </tr>
+
                                 <?php
                             }
                             ?>
