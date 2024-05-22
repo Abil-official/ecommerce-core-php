@@ -48,7 +48,7 @@
                         header("Location: ../admin/index.php");
                         break;
                     case 'trader':
-                        header("Location: ../home/index.php");
+                        header("Location: ../trader/dashboard.php");
                         break;
                     default:
                         header("Location: ../home/index.php");

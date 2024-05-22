@@ -11,7 +11,7 @@
 
 	<link rel="stylesheet" href="../../css/admin">
 
-	<title>Admin Dashboard</title>
+	<title>Trader Dashboard</title>
 </head>
 
 <body>
@@ -35,6 +35,12 @@
 					<a href="#">
 						<i class='bx bxs-dashboard'></i>
 						<span class="text">Dashboard</span>
+					</a>
+				</li>
+				<li class="">
+					<a href="shop/index.php">
+						<i class='bx bxs-dashboard'></i>
+						<span class="text">Shop</span>
 					</a>
 				</li>
 				<li>
@@ -105,7 +111,7 @@
 		<main>
 			<div class="head-title">
 				<div class="left">
-					<h1>Admin Dashboard</h1>
+					<h1>Trader Dashboard</h1>
 					<ul class="breadcrumb">
 					</ul>
 				</div>
