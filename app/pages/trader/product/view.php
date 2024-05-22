@@ -7,9 +7,6 @@
 
     <!-- Boxicons -->
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-    <!-- bootstrap -->
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> -->
     <!-- icon -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
@@ -17,23 +14,16 @@
 
     <!-- My CSS -->
 
-    <link rel="stylesheet" href="../../../css/admin">
+    <link rel="stylesheet" href="../../../css/admin.css">
+
+    <link rel="stylesheet" href="../../../css/global.css">
 
     <title>Admin Dashboard</title>
 
-    <style>
-        .product-list-img {
-            width: 50px;
-            height: 50px;
-            overflow: hidden;
-        }
-    </style>
+
 </head>
 
 <body>
-    <?php
-
-    ?>
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
@@ -126,47 +116,47 @@
                     </ul>
                 </div>
             </div>
-            <!-- <div class="">
-                <div class="card mb-4 p-4">
-                    <div class="mb-3 float-end">
-                        <a href="./edit.php" class="btn btn-success">Add New Product</a>
+            <div class="table-data" style="grid-template-columns: none;">
+
+                <div class="order">
+                    <div class="head">
+                        <a href="./add.php" class="status completed btn">Add New Product</a>
                     </div>
-                    <table class="table table-hover">
+                    <table>
                         <thead>
                             <tr>
-                                <th scope="col">S.N</th>
-                                <th scope="col">Image</th>
-                                <th scope="col">Name</th>
-                                <th scope="col">Cost Price</th>
-                                <th scope="col">Selling price</th>
-                                <th scope="col">Action</th>
+                                <th>S.N</th>
+                                <th>Product Name</th>
+                                <th>Cost Price</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
+
                             <tr>
-                                <th scope="row">tr2556</th>
                                 <td>
-                                    <div class="product-list-img rounded">
-                                        <img src="../../../images/profile.png" class="w-100 h-100 object-fit-cover"
-                                            alt="">
-                                    </div>
+                                    <img src="../../../images/user.png">
+
                                 </td>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
+                                <td>fdsafdsaf</td>
+                                <td>fsdfsafsadf</td>
+                                <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
                                 <td>
-                                    <div class="d-flex gap-3">
-                                        <a href=""><i class="fa-solid fa-eye"></i></a>
-                                        <a href=""><i class="fa-solid fa-pen-to-square text-warning"></i></a>
-                                        <a href=""><i class="fa-solid fa-trash text-danger"></i></a>
-                                    </div>
+                                    fsdfdf
                                 </td>
+
+
                             </tr>
+
+
+
+
+
                         </tbody>
                     </table>
                 </div>
-            </div> -->
 
+            </div>
         </main>
         <!-- MAIN -->
     </section>
