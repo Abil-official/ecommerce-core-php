@@ -40,7 +40,7 @@
                 $_SESSION['message'] = "Login successful!";
                 switch ($user['user_role']) {
                     case 'admin':
-                        header("Location: ../home/index.php");
+                        header("Location: ../admin/index.php");
                         break;
                     case 'trader':
                         header("Location: ../home/index.php");
