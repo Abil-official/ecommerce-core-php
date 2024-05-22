@@ -21,16 +21,35 @@ include "../../connection.php";
 <body>
     <?php
     $disabledUserCount = null;
+    $approvedUserCount = null;
+    $pendingUserCount = null;
+    $allUsers = null;
     if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         // Query to get the count of disabled users
-        $query = "SELECT COUNT(*) as user_count FROM `users` WHERE `status` = 'disabled'";
+        $query = "SELECT * FROM `users` WHERE `status` = 'disabled'";
         // Execute the query
         $result = mysqli_query($con, $query);
         // Fetch the count result
-        $data = mysqli_fetch_assoc($result);
-        $disabledUserCount = $data['user_count'];
+        $disabledUserCount = mysqli_num_rows($result);
+        // Query to get the count of approved users
+        $query = "SELECT * FROM `users` WHERE `status` = 'approved'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+        // Fetch the count result
+        $approvedUserCount = mysqli_num_rows($result);
+        // Query to get the count of pending users
+        $query = "SELECT * FROM `users` WHERE `status` = 'pending'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+        // Fetch the count result
+        $pendingUserCount = mysqli_num_rows($result);
+        // Query to get all users
+        $query = "SELECT * FROM `users`";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+       
+        $allUsers = mysqli_fetch_all($result, MYSQLI_ASSOC);
     }
-    var_dump($disabledUserCount);
     ?>
 
     <!-- SIDEBAR -->
@@ -46,13 +65,13 @@ include "../../connection.php";
                 </a>
             </li>
             <ul class="side-menu top">
-                <li class="active">
-                    <a href="#">
+                <li class="">
+                    <a href="index.php">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li>
+                <li class="active">
                     <a href="approval-requests.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Approval Requests</span>
@@ -157,18 +176,11 @@ include "../../connection.php";
             </div>
 
             <ul class="box-info">
-                <li>
-                    <i class='bx bx-user-circle'></i>
 
-                    <span class="text">
-                        <h3>$25431</h3>
-                        <p>Requests</p>
-                    </span>
-                </li>
                 <li>
                     <i class='bx bx-user-circle'></i>
                     <span class="text">
-                        <h3>1020</h3>
+                        <h3><?php echo ($approvedUserCount) ?></h3>
                         <p>Approved</p>
                     </span>
                 </li>
@@ -176,112 +188,69 @@ include "../../connection.php";
                 <li>
                     <i class='bx bx-user-circle'></i>
                     <span class="text">
-                        <h3><?php $disabledUserCount ?></h3>
-                        <p>Declined</p>
+                        <h3><?php echo ($disabledUserCount) ?></h3>
+                        <p>Disabled</p>
                     </span>
                 </li>
                 <li>
                     <i class='bx bx-user-circle'></i>
                     <span class="text">
-                        <h3>1020</h3>
+                        <h3><?php
+                        echo ($pendingUserCount)
+                            ?></h3>
                         <p>Pending</p>
                     </span>
                 </li>
             </ul>
 
 
-            <div class="table-data">
+            <div class="table-data" style="grid-template-columns: none;">
                 <div class="order">
                     <div class="head">
-                        <h3>Top Five Traders</h3>
+                        <h3></h3>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>User</th>
-                                <th>Date Order</th>
-                                <th>Payment </th>
-                                <th>Order Status</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>User Type </th>
+                                <th>Approval Status</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>
-                                    <img src="../../images/user.png">
-                                    <p>Preshna Adhikari</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../images/user.png">
-                                    <p>Simran Shrestha</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../images/user.png">
-                                    <p>Riya Shrestha</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status process">Process</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../images/user.png">
-                                    <p>Anshu Kharel</p>
-                                </td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <img src="../../images/user.png">
-                                    <p>Aseena Subedi</p>
-                                    <j /td>
-                                <td>03-10-2024</td>
-                                <td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-                                <td><span class="status completed">Completed</span></td>
-                            </tr>
+                            <?php
+                            foreach ($allUsers ?? [] as $user) {
+                                ?>
+
+                                <tr>
+
+                                    <td>
+                                        <img src="../../images/user.png">
+                                        <a href="edit-request.php?id=<?php echo ($user['user_id']) ?>">
+                                            <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $user['email'] ?></td>
+                                    <td><?php echo $user['user_role'] ?></td>
+                                    <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
+                                    <td><span
+                                            class="status <?php echo $user['status'] ?>"><?php echo $user['status'] ?></span>
+                                    </td>
+
+
+                                </tr>
+
+                                <?php
+                            }
+                            ?>
+
+
+
                         </tbody>
                     </table>
                 </div>
-                <div class="todo">
-                    <div class="head">
-                        <h3>Total Customers</h3>
-                        <i class='bx bx-plus'></i>
-                        <i class='bx bx-filter'></i>
-                    </div>
-                    <ul class="todo-list">
-                        <li class="completed">
-                            <p>Aseena Subedi</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Riya Stha</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Simran Stha</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="completed">
-                            <p>Anshu Kharel</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                        <li class="not-completed">
-                            <p>Preshna Adhikari</p>
-                            <i class='bx bx-dots-vertical-rounded'></i>
-                        </li>
-                    </ul>
-                </div>
+
             </div>
         </main>
         <!-- MAIN -->

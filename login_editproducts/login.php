@@ -26,6 +26,7 @@
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['user_name'] = $user['user_name'];
                 $_SESSION['full_name'] = $user['first_name'] . ' ' . $user['last_name'];
+                $_SESSION['role'] = $user['user_role'];
                 $_SESSION['message'] = "Login successful!";
                 header("Location: ../pages/dashboard.php");
 
