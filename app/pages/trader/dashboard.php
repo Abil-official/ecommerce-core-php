@@ -1,3 +1,26 @@
+<?php
+include "../../connection.php";
+session_start();
+if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
+	$userID = $_SESSION['user_id'];
+
+	$query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
+	$result = mysqli_query($con, $query);
+	if ($result && mysqli_num_rows($result) > 0) {
+		$user = mysqli_fetch_assoc($result);
+		if ($user['status'] == 'pending') {
+			header("Location: ../auth/login.php");
+
+			exit;
+		}
+	}
+
+} else {
+	header("Location: ../auth/login.php");
+	exit;
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -9,7 +32,7 @@
 	<link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
 	<!-- My CSS -->
 
-	<link rel="stylesheet" href="../../css/admin">
+	<link rel="stylesheet" href="../../css/admin.css">
 
 	<title>Trader Dashboard</title>
 </head>
