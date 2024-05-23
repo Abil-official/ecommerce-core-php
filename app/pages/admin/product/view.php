@@ -124,7 +124,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                     </a>
                 </li>
                 <li class="active">
-                    <a href="#">
+                    <a href="./index.php">
                         <i class='bx bxl-product-hunt'></i>
                         <span class="text">All Product</span>
                     </a>
