@@ -34,7 +34,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <!-- My CSS -->
 
-    <link rel="stylesheet" href="../../../css/admin">
+    <link rel="stylesheet" href="../../../css/admin.css">
 
     <title>Profile</title>
 </head>

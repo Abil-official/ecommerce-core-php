@@ -199,7 +199,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
                             ?>
                             <div class="w-[120px] h-[120px]">
-                                <img src="<?php echo "../../../" . $image; ?>" alt="" class="h-full w-full" />
+                                <img src="<?php echo "../../.." . $image; ?>" alt="" class="h-full w-full" />
                             </div>
                             <?php
                         }

@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 				</li>
 				<li class="">
 					<a href="./profile/view.php">
-						<i class='bx bxs-dashboard'></i>
+					<i class='bx bxl-product-hunt'></i>
 						<span class="text">Profile</span>
 					</a>
 				</li>
