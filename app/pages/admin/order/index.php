@@ -194,7 +194,6 @@ include "../../../connection.php";
                                 <th>Quantity</th>
                                 <th>Totat Amount </th>
                                 <th>Created at</th>
-                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
