@@ -214,7 +214,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['order'])) {
                 ?>
                 <div class="flex justify-center mt-8 gap-4">
                     <div class="w-3/4 bg-red-100 p-4 rounded-md">
-                        <p class="text-red-500">Not Any Cart Here</p>
+                        <p class="text-red-500">Not Any Cart Here.</p>
                     </div>
 
                 </div>
