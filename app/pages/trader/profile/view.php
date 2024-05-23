@@ -227,13 +227,52 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 </div>
             </div> -->
 
-<section>
-    <div>
-        <div>
-            Name 
-        </div>
-    </div>
-</section>
+            <section class=" flex justify-between bg-white p-4">
+                <div class="w-1/2">
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">First Name</p>
+                        <p><?php echo $user['first_name']; ?></p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Last Name</p>
+                        <p><?php echo $user['last_name']; ?></p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Address</p>
+                        <p><?php echo $user['address']; ?></p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Email</p>
+                        <p><?php echo $user['email']; ?></p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Phone Number</p>
+                        <p><?php echo $user['phone_no']; ?></p>
+                    </div>
+                </div>
+                <div class="w-1/2">
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Category</p>
+                        <p>Sumit</p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Shop Type</p>
+                        <p>Ram</p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Role</p>
+                        <p>Trader</p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Gender</p>
+                        <p><?php echo $user['gender']; ?></p>
+                    </div>
+                    <div class="border-b-1 py-4">
+                        <p class="text-gray">Phone Number</p>
+                        <p>0000000000</p>
+                    </div>
+                </div>
+            </section>
         </main>
         <!-- MAIN -->
     </section>
