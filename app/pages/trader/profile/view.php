@@ -43,7 +43,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
     <link rel="stylesheet" href="../../../css/global.css">
 
-    <title>Product Lists</title>
+    <title>Trader Profile</title>
 
 
 </head>
@@ -69,11 +69,11 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                     </a>
                 </li>
                 <li class="active">
-					<a href="/">
-						<i class='bx bxs-dashboard'></i>
-						<span class="text">Profile</span>
-					</a>
-				</li>
+                    <a href="/">
+                        <i class='bx bxs-dashboard'></i>
+                        <span class="text">Profile</span>
+                    </a>
+                </li>
                 <li class="">
                     <a href="../product/index.php">
                         <i class='bx bxl-product-hunt'></i>
@@ -142,7 +142,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Lists </h1>
+                    <h1>My Profile</h1>
                     <?php
                     if (isset($_SESSION['message'])) {
                         ?>
@@ -156,101 +156,84 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
                 </div>
             </div>
-            <div class="mt-6">
-                <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                    <div class="rounded-t mb-0 px-4 py-3 border-0">
-                        <div class="flex flex-wrap items-center">
-                            <div class="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                                <a href="./add.php" class="btn">Add New Product</a>
-                            </div>
+
+            <!-- <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
+                <div class="block w-full p-6">
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Full Name</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
+                            </p>
                         </div>
                     </div>
-                    <div class="block w-full overflow-x-auto">
-                        <table class="items-center bg-transparent w-full border-collapse ">
-                            <thead>
-                                <tr>
-                                    <th
-                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        s.n
-                                    </th>
-                                    <th
-                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        name
-                                    </th>
-                                    <th
-                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        price
-                                    </th>
-                                    <th
-                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        quantity
-                                    </th>
-                                    <th
-                                        class="px-6 bg-stone-500 text-white align-middle border border-solid border-blueGray-100 py-3 uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left">
-                                        action
-                                    </th>
-                                </tr>
-                            </thead>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Email</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['email']; ?></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Phone</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['phone_no']; ?></p>
+                        </div>
+                    </div>
 
-                            <tbody>
-                                <?php
-                                $query = "SELECT * FROM `products`";
-                                $result = mysqli_query($con, $query);
-
-                                if ($result && mysqli_num_rows($result) > 0) {
-                                    $sn = 1;
-                                    while ($row = mysqli_fetch_assoc($result)) {
-                                        ?>
-                                        <tr>
-                                            <th
-                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                                <?php echo $sn++; ?>
-                                            </th>
-                                            <th
-                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 text-left text-blueGray-700 ">
-                                                <?php echo $row['product_name']; ?>
-                                            </th>
-                                            <td
-                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4 ">
-                                                <?php echo $row['price']; ?>
-                                            </td>
-
-                                            <td
-                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
-                                                <!-- <i class="fas fa-arrow-up text-emerald-500 mr-4"></i> -->
-                                                <?php echo $row['quantity']; ?>
-                                            </td>
-
-                                            <td
-                                                class="border-t-0 px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
-                                                <a href="./view.php?id=<?php echo $row['product_id']; ?>" class="btn"><i
-                                                        class="fa-solid fa-eye"></i></a>
-                                                <a href="./edit.php?id=<?php echo $row['product_id']; ?>" class="btn"><i
-                                                        class="fa-solid fa-pen-to-square"></i></a>
-                                                <a href="./delete.php?id=<?php echo $row['product_id']; ?>"
-                                                    class="btn text-red-500"><i class="fa-solid fa-trash"></i></a>
-                                            </td>
-                                        </tr>
-                                        <?php
-                                    }
-                                } else {
-                                    ?>
-                                    <tr>
-                                        <td colspan="7"
-                                            class="border-t-0 text-center font-bold px-6 align-middle border-l-0 border-r-0 whitespace-nowrap p-4">
-                                            Not found
-                                        </td>
-                                    </tr>
-                                    <?php
-                                }
-                                ?>
-
-                            </tbody>
-
-                        </table>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Address</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['address']; ?></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Gender</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['gender'] == 'f' ? 'Female' : 'Male'; ?></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Age</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <p class="text-muted mb-0"><?php echo $user['age']; ?></p>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-sm-3">
+                            <p class="mb-0">Status</p>
+                        </div>
+                        <div class="col-sm-9">
+                            <span
+                                class="text-muted mb-0 btn btn-success text-white text-uppercase"><?php echo $user['status']; ?></span>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
+
+<section>
+    <div>
+        <div>
+            Name 
+        </div>
+    </div>
+</section>
         </main>
         <!-- MAIN -->
     </section>
