@@ -139,10 +139,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             <div class="flex justify-center mt-8 gap-4">
                 <div class="w-3/4 bg-green-100 p-4 rounded-md">
                     <div class="">
-                        <!-- <div class="flex justify-between items-center">
-                <p class="font-semibold text-gray">Quantity</p>
-                <p id="t_qty">1</p>
-              </div> -->
+             
 
                         <div class="flex justify-between items-center">
                             <p class="font-semibold text-gray">Tax</p>
