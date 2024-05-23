@@ -46,14 +46,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['order'])) {
         $totalQty = $qauntities[$key];
         $invoice_no = "inv" . rand(0, 100000);
 
-        $order = "INSERT INTO `orders`(`order_date`, `order_quantity`, `total_amount`, `invoice_no`, `cart_id`, `collection_id`) 
-         VALUES ('$collection_date','$totalQty','$totalAmount','$invoice_no','1','$collection_id')";
+        $order = "INSERT INTO `orders`(`order_date`, `order_quantity`, `total_amount`, `invoice_no`, `user_id`, `collection_id`) 
+         VALUES ('$collection_date','$totalQty','$totalAmount','$invoice_no','$userID','$collection_id')";
         mysqli_query($con, $order);
 
         $order_id = mysqli_insert_id($con);
 
-        $orderProduct = "INSERT INTO `order_products`(`order_id`, `product_id`)
-             VALUES ('$order_id','$productID')";
+        $orderProduct = "INSERT INTO `order_products`(`product_id`,`user_id`)
+             VALUES ('$productID','$userID')";
         mysqli_query($con, $orderProduct);
 
         $delete = "DELETE FROM `cart_products` WHERE `product_id` = $productID";
