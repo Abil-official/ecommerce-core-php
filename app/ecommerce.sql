@@ -148,18 +148,20 @@ CREATE TABLE REPORTS (
 
 -- CART_PRODUCT Table
 CREATE TABLE CART_PRODUCTS (
-    cart_id INT,
+    cart_id INT AUTO_INCREMENT,
+    user_id INT,
     product_id INT,
-    PRIMARY KEY (cart_id, product_id),
-    FOREIGN KEY (cart_id) REFERENCES CART(cart_id),
-    FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
+    PRIMARY KEY (user_id, product_id),
+    FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id),
+    FOREIGN KEY (user_id) REFERENCES USER(user_id)
 );
 
 -- WISHLIST_PRODUCT Table
 CREATE TABLE WISHLIST_PRODUCTS (
-    wishlist_id INT,
+    wishlist_id INT AUTO_INCREMENT ,
     product_id INT,
-    PRIMARY KEY (wishlist_id, product_id),
+    user_id INT,
+    PRIMARY KEY ( product_id,user_id),
     FOREIGN KEY (wishlist_id) REFERENCES WISHLIST(wishlist_id),
     FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
 );

@@ -15,7 +15,7 @@ include "../../connection.php";
 
     <link rel="stylesheet" href="../../css/admin">
 
-    <title>Approval Requests</title>
+    <title>Users</title>
 </head>
 
 <body>
@@ -74,7 +74,7 @@ include "../../connection.php";
                 <li class="active">
                     <a href="approval-requests.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Approval Requests</span>
+                        <span class="text">Users</span>
                     </a>
                 </li>
                 <li>
@@ -175,7 +175,7 @@ include "../../connection.php";
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Approval Requests</h1>
+                    <h1>Users</h1>
                     <ul class="breadcrumb">
                     </ul>
                 </div>

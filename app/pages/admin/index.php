@@ -40,7 +40,7 @@
 				<li>
 					<a href="approval-requests.php">
 						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Approval Requests</span>
+						<span class="text">Users</span>
 					</a>
 				</li>
 				<li>

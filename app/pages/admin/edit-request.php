@@ -68,7 +68,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
     <link rel="stylesheet" href="../../css/admin">
 
 
-    <title>Approval Requests</title>
+    <title>Users</title>
 </head>
 
 <body>
@@ -96,7 +96,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                 <li class="active">
                     <a href="approval-requests.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Approval Requests</span>
+                        <span class="text">Users</span>
                     </a>
                 </li>
                 <li>

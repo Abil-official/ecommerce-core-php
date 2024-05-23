@@ -7,14 +7,30 @@ $approvedUserCount = null;
 $pendingUserCount = null;
 $allUsers = null;
 if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
-    // Query to get all users
-    $query = "SELECT * FROM `products`";
+    $userId = $_SESSION['user_id'];
+    // Query to get all products
+    $query = "
+    SELECT 
+        products.*, 
+        categories.name AS category_name,
+        shops.shop_name
+    FROM 
+        products
+    JOIN 
+        categories ON products.product_category_id = categories.category_id
+    JOIN 
+        shops ON products.shop_id = shops.shop_id
+    WHERE 
+        shops.user_id = $userId
+";
+
     // Execute the query
     $result = mysqli_query($con, $query);
 
     $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-
+  
 }
+
 
 ?>
 <!DOCTYPE html>

@@ -70,13 +70,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     }
 
     // insert data into db
-    $insert = "INSERT INTO `products`(`product_name`, `product_description`, `price`, `quantity`, `stock_check`, `allergy_info`, `product_image`, `product_category_id`, `shop_id`,`user_id`) 
-    VALUES ('$product_name','$product_description','$price','$quantity','$stock_check','$allergy_info','$product_image','$product_category_id','$shop_id','$userID')";
+    $insert = "INSERT INTO `products`(`product_name`, `product_description`, `price`, `quantity`, `stock_check`, `allergy_info`, `product_image`, `product_category_id`, `shop_id`) 
+    VALUES ('$product_name','$product_description','$price','$quantity','$stock_check','$allergy_info','$product_image','$product_category_id','$shop_id')";
 
     $query = mysqli_query($con, $insert);
     if ($query) {
         $_SESSION['message'] = "Created Successfully";
-        header("Location: ./view.php");
+        header("Location: ./list.php");
         exit();
     } else {
         echo '<script>alert("Something went wrong!");</script>';
