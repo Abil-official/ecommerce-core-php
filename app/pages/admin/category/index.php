@@ -46,10 +46,17 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
+
                 <li>
-                    <a href="../approval-requests.php">
+                    <a href="../traders.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Users</span>
+                        <span class="text">Traders</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="../customers.php">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Customers</span>
                     </a>
                 </li>
                 <li class="active">
