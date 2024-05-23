@@ -118,12 +118,6 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             </div>
 
             <ul class="box-info">
-                <li>
-                    <i class='bx bxs-user-rectangle medium-icon'></i>
-                    <span class="text">
-                        <p>My Profile</p>
-                    </span>
-                </li>
 
                 <li>
                     <i class='bx bxs-calendar-check'></i>
@@ -131,28 +125,11 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                         <p>My Order</p>
                     </span>
                 </li>
-                <li>
-                    <i class='bx bxs-credit-card-alt large-icon'></i>
-                    <span class="text">
-                        <p>Payments</p>
-                    </span>
-                </li>
-                <li>
-                    <i class='bx bx-comment-add'></i>
-                    <span class="text">
-                        <p>Review</p>
-                    </span>
-                </li>
-                <li>
-                    <i class='bx bx-question-mark'></i>
-                    <span class="text">
-                        <p>Question</p>
-                    </span>
-                </li>
+                
                 <li>
                     <i class='bx bxs-cog'></i>
                     <span class="text">
-                        <p>Change Password</p>
+                        <p>Wishlists</p>
                     </span>
                 </li>
             </ul>
