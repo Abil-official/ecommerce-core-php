@@ -20,6 +20,49 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     exit;
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['order'])) {
+    $productIDs = $_POST['products_id'];
+    $qauntities = $_POST['qauntities'];
+
+    foreach ($productIDs as $key => $productID) {
+
+
+        $query = "SELECT * FROM `products` WHERE `product_id` = '$productID'";
+        $result = mysqli_query($con, $query);
+        if ($result && mysqli_num_rows($result) > 0) {
+            $product = mysqli_fetch_assoc($result);
+            $totalAmount = $product['price'] * $qauntities[$key];
+        }
+
+        $collection_date = date('y-m-d');
+        $collection_time = date('H:i:s');
+        $collection = "INSERT INTO `collection_slots`(`collection_date`, `collection_time`) 
+         VALUES ('$collection_date','$collection_time')";
+        mysqli_query($con, $collection);
+
+        $collection_id = mysqli_insert_id($con);
+
+
+        $totalQty = $qauntities[$key];
+        $invoice_no = "inv" . rand(0, 100000);
+
+        $order = "INSERT INTO `orders`(`order_date`, `order_quantity`, `total_amount`, `invoice_no`, `cart_id`, `collection_id`) 
+         VALUES ('$collection_date','$totalQty','$totalAmount','$invoice_no','1','$collection_id')";
+        mysqli_query($con, $order);
+
+        $order_id = mysqli_insert_id($con);
+
+        $orderProduct = "INSERT INTO `order_products`(`order_id`, `product_id`)
+             VALUES ('$order_id','$productID')";
+        mysqli_query($con, $orderProduct);
+
+        $delete = "DELETE FROM `cart_products` WHERE `product_id` = $productID";
+        mysqli_query($con, $delete);
+    }
+    header("Location: ../../index.php");
+    exit;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -70,13 +113,13 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
       ";
             $result = mysqli_query($con, $query);
             if ($result && mysqli_num_rows($result) > 0) {
-
+                echo "<form action='' method='post'>";
                 while ($row = mysqli_fetch_assoc($result)) {
                     $productID = $row['product_id'];
-                  
+
                     $query2 = "SELECT * FROM `products` WHERE `product_id`= '$productID'";
                     $result2 = mysqli_query($con, $query2);
-            
+
                     while ($row2 = mysqli_fetch_assoc($result2)) {
 
                         ?>
@@ -89,12 +132,15 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                                         <img src="/image/categories/1691421047.jpg" alt="" />
                                     </div>
                                     <div class="text-gray">
+                                        <input type="text" value="<?php echo $row2['product_id']; ?>" name="products_id[]"
+                                            class="hidden">
                                         <p><?php echo $row2['product_name'] ?></p>
                                         <p>Price: $<span class="original_price"><?php echo $row2['price'] ?></span></p>
                                         <p>
                                             Qty: <span class="t_qty">1</span> @ $<span
                                                 class="t_price"><?php echo $row2['price'] ?></span>
                                         </p>
+                                        <input type="text" value="1" name="qauntities[]" class="hidden t_qty input">
                                     </div>
                                 </div>
 
@@ -127,6 +173,52 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                         <?php
                     }
                 }
+                ?>
+                <!-- model -->
+                <div
+                    class="w-full h-full hidden fixed px-5 py-5 bg-black bg-opacity-30 top-0 flex justify-center items-center model">
+                    <div class="px-3 py-3 top-0 bg-white rounded-md w-3/4">
+                        <div class="w-full">
+                            <div class="float-end close">
+                                <button class="btn">X</button>
+                            </div>
+                            <h1 class="font-semibold text-xl text-center">Information</h1>
+                            <div class="mt-4">
+                                <!-- <form action=""> -->
+                                <div class="mt-3 flex gap-4">
+                                    <input type="text" placeholder="First name"
+                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                                    <input type="text" placeholder="Last name"
+                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                                </div>
+
+                                <div class="mt-1">
+                                    <input type="email" placeholder="Email address"
+                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                                </div>
+
+                                <div class="mt-1">
+                                    <input type="text" placeholder="Contact"
+                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                                </div>
+                                <div class="mt-1">
+                                    <input type="text" placeholder="Address"
+                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                                </div>
+
+                                <button class="bg-primary font-bold text-white w-full py-2 mt-4 text-center rounded-md"
+                                    type="submit" name="order">
+                                    Order
+                                </button>
+                                <!-- </form> -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end model -->
+                <?php
+
+                echo "</form>";
             } else {
                 ?>
                 <p>not cart</p>
@@ -139,7 +231,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
             <div class="flex justify-center mt-8 gap-4">
                 <div class="w-3/4 bg-green-100 p-4 rounded-md">
                     <div class="">
-             
+
 
                         <div class="flex justify-between items-center">
                             <p class="font-semibold text-gray">Tax</p>
@@ -180,49 +272,6 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 
     <!-- {{-- footer --}} -->
 
-
-    <!-- model -->
-    <div
-        class="w-full h-full hidden fixed px-5 py-5 bg-black bg-opacity-30 top-0 flex justify-center items-center model">
-        <div class="px-3 py-3 top-0 bg-white rounded-md w-3/4">
-            <div class="w-full">
-                <div class="float-end close">
-                    <button class="btn">X</button>
-                </div>
-                <h1 class="font-semibold text-xl text-center">Information</h1>
-                <div class="mt-4">
-                    <form action="">
-                        <div class="mt-3 flex gap-4">
-                            <input type="text" placeholder="First name"
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                            <input type="text" placeholder="Last name"
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-
-                        <div class="mt-1">
-                            <input type="email" placeholder="Email address"
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-
-                        <div class="mt-1">
-                            <input type="text" placeholder="Contact"
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-                        <div class="mt-1">
-                            <input type="text" placeholder="Address"
-                                class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                        </div>
-
-                        <button class="bg-primary font-bold text-white w-full py-2 mt-4 text-center rounded-md"
-                            type="submit">
-                            Order
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- end model -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
         crossorigin="anonymous"></script>
@@ -253,6 +302,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 var qtyElement = parent.find(".quantity");
                 var qty = parseInt(qtyElement.text());
                 var totalPriceSet = parent.find(".t_price");
+                var totalInput = parent.find(".input");
                 var totalQtySet = parent.find(".t_qty");
                 var originalPrice = parseInt(parent.find(".original_price").text());
 
@@ -263,6 +313,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 var total = originalPrice * qty;
                 totalPriceSet.text(total);
                 totalQtySet.text(qty);
+                totalInput.val(qty);
                 updateTotals();
             });
 
@@ -272,6 +323,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 var qtyElement = parent.find(".quantity");
                 var qty = parseInt(qtyElement.text());
                 var totalPriceSet = parent.find(".t_price");
+                var totalInput = parent.find(".input");
                 var totalQtySet = parent.find(".t_qty");
                 var originalPrice = parseInt(parent.find(".original_price").text());
 
@@ -282,6 +334,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                     var total = originalPrice * qty;
                     totalPriceSet.text(total);
                     totalQtySet.text(qty);
+                    totalInput.val(qty);
                 }
                 updateTotals();
             });
