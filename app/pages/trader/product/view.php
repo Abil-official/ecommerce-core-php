@@ -40,9 +40,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $result = mysqli_query($con, $query);
     if ($result && mysqli_num_rows($result) > 0) {
         $row = mysqli_fetch_assoc($result);
-        var_dump($row);
     } else {
-        echo "No vegetable found with this ID.";
+        echo "No product found with this ID.";
         exit;
     }
 } else {

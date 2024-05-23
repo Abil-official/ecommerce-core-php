@@ -113,6 +113,7 @@ CREATE TABLE SHOPS (
     shop_address TEXT,
     shop_type VARCHAR(50),
     shop_description TEXT,
+        shop_imgage VARCHAR(255),
     user_id INT,
     FOREIGN KEY (user_id) REFERENCES USER(user_id)
 );

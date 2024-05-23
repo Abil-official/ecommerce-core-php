@@ -1,6 +1,8 @@
 <?php
 include "../../../connection.php";
+
 session_start();
+
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
 
@@ -20,6 +22,60 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     exit;
 }
 
+if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
+
+    $first_name = $_POST['first_name'];
+    $last_name = $_POST['last_name'];
+    $address = $_POST['address'];
+    $contact = $_POST['phone_number'];
+    $age = $_POST['age'];
+    $gender = $_POST['gender'];
+    $old_password = $_POST['old_password'];
+    $new_password = $_POST['new_password'];
+
+    // Server-side validation to ensure no fields are null
+    if (empty($first_name) || empty($last_name) || empty($address) || empty($contact) || empty($age) || empty($gender)) {
+        $_SESSION['error'] = "All field required!";
+        header("Location: ./view.php");
+        exit;
+    }
+
+    $email = $user['email'];
+
+    $query = "SELECT * FROM `users` WHERE `email` = '$email'";
+    $result = mysqli_query($con, $query);
+    if ($result && mysqli_num_rows($result) > 0) {
+        $user = mysqli_fetch_assoc($result);
+
+        $update_query = "UPDATE `users` SET 
+        `first_name` = '$first_name',
+        `last_name` = '$last_name',
+        `phone_no` = '$contact',
+        `address` = '$address',
+        `gender` = '$gender', 
+        `age` = '$age'";
+
+        if (password_verify($old_password, $user['password'])) {
+            if (!empty($new_password)) {
+                $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+                $update_query .= ", `password` = '$hashed_new_password'";
+            }
+        } else {
+            $_SESSION['message'] = "Invalid old password!";
+        }
+    } else {
+        $_SESSION['message'] = "User not found!";
+    }
+    $update_query .= " WHERE `email` = '$email'";
+    if (mysqli_query($con, $update_query)) {
+        $_SESSION['message'] = "Profile updated successfully!";
+        header("Location: ./view.php");
+        exit();
+    } else {
+        $_SESSION['message'] = "Error updating profile!";
+    }
+    ;
+}
 ?>
 
 <!DOCTYPE html>
@@ -75,7 +131,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                     </a>
                 </li>
                 <li class="active">
-                    <a href="/">
+                    <a href="#">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Profile</span>
                     </a>
@@ -148,137 +204,108 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>My Profile</h1>
+                    <h1>Update <?php echo $user['first_name'] ?></h1>
                     <?php
-                    if (isset($_SESSION['message'])) {
-                        ?>
-
-                        <h3 class="font-semibold text-xl text-center text-green">
-                            <?php echo $_SESSION['message']; ?>
-                        </h3>
-                        <?php
-                        unset($_SESSION['message']);
-                    } ?>
-
+                    if (isset($_SESSION['error']) || !empty($_SESSION['error'])) {
+                        echo '<p class="text-danger">' . $_SESSION['error'] . '</p class="text-danger">';
+                        unset($_SESSION['error']);
+                    }
+                    ?>
                 </div>
             </div>
+            <form id="registrationForm" method="POST">
 
-            <!-- <div class="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded ">
-                <div class="block w-full p-6">
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Full Name</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['first_name'] . ' ' . $user['last_name']; ?>
-                            </p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Email</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['email']; ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Phone</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['phone_no']; ?></p>
-                        </div>
-                    </div>
 
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Address</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['address']; ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Gender</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['gender'] == 'f' ? 'Female' : 'Male'; ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Age</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <p class="text-muted mb-0"><?php echo $user['age']; ?></p>
-                        </div>
-                    </div>
-                    <hr>
-                    <div class="row">
-                        <div class="col-sm-3">
-                            <p class="mb-0">Status</p>
-                        </div>
-                        <div class="col-sm-9">
-                            <span
-                                class="text-muted mb-0 btn btn-success text-white text-uppercase"><?php echo $user['status']; ?></span>
-                        </div>
-                    </div>
+                <div class="form-field">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="first_name" placeholder="First Name"
+                        value="<?php echo ($user['first_name']) ?>" required>
                 </div>
-            </div> -->
+                <div class="form-field">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="name" name="last_name" placeholder="Last Name"
+                        value="<?php echo ($user['last_name']) ?>" required>
+                </div>
+                <div class="form-field">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" placeholder="Email"
+                        value="<?php echo ($user['email']) ?>" required disabled>
+                </div>
 
-            <section class=" flex justify-between bg-white p-4">
-                <div class="w-1/2">
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">First Name</p>
-                        <p><?php echo $user['first_name']; ?></p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Last Name</p>
-                        <p><?php echo $user['last_name']; ?></p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Address</p>
-                        <p><?php echo $user['address']; ?></p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Email</p>
-                        <p><?php echo $user['email']; ?></p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Phone Number</p>
-                        <p><?php echo $user['phone_no']; ?></p>
-                    </div>
+                <div class="form-field">
+                    <label for="address">Address</label>
+                    <input type="text" id="address" name="address" placeholder="Address"
+                        value="<?php echo ($user['address']) ?>" required>
                 </div>
-                <div class="w-1/2">
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Category</p>
-                        <p>Sumit</p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Shop Type</p>
-                        <p>Ram</p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Role</p>
-                        <p>Trader</p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Gender</p>
-                        <p><?php echo $user['gender']; ?></p>
-                    </div>
-                    <div class="border-b-1 py-4">
-                        <p class="text-gray">Phone Number</p>
-                        <p>0000000000</p>
-                    </div>
+                <div class="form-field">
+                    <label for="phone_number">Phone Number</label>
+                    <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number"
+                        value="<?php echo ($user['phone_no']) ?>" required>
                 </div>
-            </section>
+                <div class="form-field">
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" placeholder="Age" value="<?php echo ($user['age']) ?>"
+                        required>
+                </div>
+                <div class="form-field">
+
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="m" <?php if ($user['gender'] == 'm') {
+                            echo "selected";
+                        } ?>>Male</option>
+                        <option value="f" <?php if ($user['gender'] == 'f') {
+                            echo "selected";
+                        } ?>>Female
+                        </option>
+                        <option value="o" <?php if ($user['gender'] == 'o') {
+                            echo "selected";
+                        } ?>>Other</option>
+
+
+                    </select>
+
+                </div>
+                <div class="form-field">
+
+                    <label for="role"> Role</label>
+                    <select id="role" name="role" disabled>
+                        <option value="customer" <?php if ($user['user_role'] == 'customer') {
+                            echo "selected";
+                        } ?>>
+                            Customer
+                        </option>
+                        <option value="admin" <?php if ($user['user_role'] == 'admin') {
+                            echo "selected";
+                        } ?>>
+                            Admin
+                        </option>
+                        <option value="trader" <?php if ($user['user_role'] == 'trader') {
+                            echo "selected";
+                        } ?>>
+                            Trader
+                        </option>
+                    </select>
+
+                </div>
+
+
+                <div class="form-field">
+                    <label for="password">Old Password</label>
+                    <input type="password" id="password" name="old_password" placeholder="Password">
+                </div>
+
+                <div class="form-field">
+                    <label for="password">New Password</label>
+                    <input type="password" id="password" name="new_password" placeholder="Password">
+                </div>
+
+                <div class="form-field">
+                    <button type="submit" name="update">Update</button>
+                </div>
+
+
+            </form>
         </main>
         <!-- MAIN -->
     </section>
