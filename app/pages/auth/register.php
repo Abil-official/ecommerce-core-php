@@ -129,7 +129,6 @@
                     <label for="registerAs">Register As</label>
                     <select id="register_as" name="register_as">
                         <option value="customer">Customer</option>
-                        <option value="admin">Admin</option>
                         <option value="trader">Trader</option>
 
                     </select>

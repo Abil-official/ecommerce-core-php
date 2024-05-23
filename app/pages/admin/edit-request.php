@@ -93,18 +93,25 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="approval-requests.php">
+
+                <li>
+                    <a href="traders.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Users</span>
+                        <span class="text">Traders</span>
+                    </a>
+                </li>
+                <li class="">
+                    <a href="customers.php">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Customers</span>
                     </a>
                 </li>
                 <li>
-					<a href="category/index.php">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Categories</span>
-					</a>
-				</li>
+                    <a href="category/index.php">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Categories</span>
+                    </a>
+                </li>
                 <li>
                     <a href="#">
                         <i class='bx bxs-shopping-bag-alt'></i>
@@ -197,7 +204,9 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Update <?php echo $user['first_name'] ?></h1>
+                    <h1>Update
+                        <?php echo $user['first_name'] ?>
+                    </h1>
                     <ul class="breadcrumb">
                     </ul>
                 </div>
@@ -226,7 +235,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     <input type="text" id="address" name="address" placeholder="Address"
                         value="<?php echo ($user['address']) ?>" required>
                 </div>
-                <div class="form-field">
+                <div class=" form-field">
                     <label for="phone_number">Phone Number</label>
                     <input type="text" id="phone_number" name="phone_number" placeholder="Phone Number"
                         value="<?php echo ($user['phone_no']) ?>" required>
@@ -264,7 +273,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                         } ?>>
                             Customer
                         </option>
-                        <option value="admin" <?php if ($user['user_role'] == 'admin') {
+                        <option value=" admin" <?php if ($user['user_role'] == 'admin') {
                             echo "selected";
                         } ?>>
                             Admin

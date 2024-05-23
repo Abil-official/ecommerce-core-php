@@ -1,49 +1,6 @@
 <?php
-
-include "../../../connection.php";
-
 session_start();
-
-if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
-    $userID = $_SESSION['user_id'];
-
-    $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";
-    $result = mysqli_query($con, $query);
-    if ($result && mysqli_num_rows($result) > 0) {
-        $user = mysqli_fetch_assoc($result);
-        if ($user['status'] == 'pending') {
-            header("Location: ../../auth/login.php");
-            exit;
-        }
-    }
-
-} else {
-    header("Location: ../../auth/login.php");
-    exit;
-}
-
-if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
-
-    $name = $_POST['name'];
-    if (empty($name)) {
-        $_SESSION['error'] = "All field required.";
-
-        header("Location: add.php");
-        exit;
-    }
-    // insert data into db
-    $insert = "INSERT INTO `categories`(`name`)  VALUES ('$name')";
-
-    $query = mysqli_query($con, $insert);
-    if ($query) {
-        $_SESSION['message'] = "Created Successfully";
-        header("Location: index.php");
-        exit();
-    } else {
-        echo '<script>alert("Something went wrong!");</script>';
-    }
-}
-
+include "../../connection.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,21 +10,48 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Boxicons -->
-    <script src="https://cdn.tailwindcss.com"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-
     <!-- My CSS -->
 
-    <link rel="stylesheet" href="../../../css/admin.css">
-    <link rel="stylesheet" href="../../../css/global.css">
+    <link rel="stylesheet" href="../../css/admin">
 
-    <title>Add New product</title>
+    <title>Users</title>
 </head>
 
 <body>
     <?php
+    $disabledUserCount = null;
+    $approvedUserCount = null;
+    $pendingUserCount = null;
+    $allUsers = null;
+    if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
+        // Query to get the count of disabled users
+        $query = "SELECT * FROM `users` WHERE `status` = 'disabled'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+        // Fetch the count result
+        $disabledUserCount = mysqli_num_rows($result);
+        // Query to get the count of approved users
+        $query = "SELECT * FROM `users` WHERE `status` = 'approved'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+        // Fetch the count result
+        $approvedUserCount = mysqli_num_rows($result);
+        // Query to get the count of pending users
+        $query = "SELECT * FROM `users` WHERE `status` = 'pending'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
+        // Fetch the count result
+        $pendingUserCount = mysqli_num_rows($result);
+        // Query to get all users
+        $query = "SELECT * FROM `users` WHERE user_role='customer'";
+        // Execute the query
+        $result = mysqli_query($con, $query);
 
+        $allUsers = mysqli_fetch_all($result, MYSQLI_ASSOC);
+    }
     ?>
+
     <!-- SIDEBAR -->
     <section id="sidebar">
         <a href="#" class="brand">
@@ -82,26 +66,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
             </li>
             <ul class="side-menu top">
                 <li class="">
-                    <a href="../index.php">
+                    <a href="index">
                         <i class='bx bxs-dashboard'></i>
                         <span class="text">Dashboard</span>
                     </a>
                 </li>
 
-                <li>
-                    <a href="../traders.php">
+                <li class="">
+                    <a href="traders">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Traders</span>
                     </a>
                 </li>
-                <li class="">
-                    <a href="../customers.php">
+                <li class="active">
+                    <a href="#">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Customers</span>
                     </a>
                 </li>
-                <li class="active">
-                    <a href="#">
+                <li>
+                    <a href="category/index.php">
                         <i class='bx bxs-shopping-bag-alt'></i>
                         <span class="text">Categories</span>
                     </a>
@@ -189,7 +173,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
                 <span class="num">3</span>
             </a>
             <a href="#" class="profile">
-                <img src="../../../images/profile.png">
+                <img src="../../images/profile.png">
             </a>
         </nav>
         <!-- NAVBAR -->
@@ -198,46 +182,86 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit'])) {
         <main>
             <div class="head-title">
                 <div class="left">
-                    <h1>Add Category</h1>
+                    <h1>Users</h1>
                     <ul class="breadcrumb">
                     </ul>
                 </div>
             </div>
 
-            <div class="w-full">
+            <ul class="box-info">
 
-                <?php
+                <li>
+                    <i class='bx bx-user-circle'></i>
+                    <span class="text">
+                        <h3><?php echo ($approvedUserCount) ?></h3>
+                        <p>Approved</p>
+                    </span>
+                </li>
 
-                if (isset($_SESSION['error'])) {
-                    ?>
+                <li>
+                    <i class='bx bx-user-circle'></i>
+                    <span class="text">
+                        <h3><?php echo ($disabledUserCount) ?></h3>
+                        <p>Disabled</p>
+                    </span>
+                </li>
+                <li>
+                    <i class='bx bx-user-circle'></i>
+                    <span class="text">
+                        <h3><?php
+                        echo ($pendingUserCount)
+                            ?></h3>
+                        <p>Pending</p>
+                    </span>
+                </li>
+            </ul>
 
-                    <h1 class="font-semibold text-xl text-center text-red-500">
-                        <?php echo $_SESSION['error']; ?>
-                    </h1>
-                    <?php
-                    unset($_SESSION['error']);
-                } ?>
-                <div class="mt-4">
-                    <?php
 
-                    ?>
+            <div class="table-data" style="grid-template-columns: none;">
+                <div class="order">
+                    <div class="head">
+                        <h3></h3>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>User Type </th>
+                                <th>Approval Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <?php
+                            foreach ($allUsers ?? [] as $user) {
+                                ?>
 
-                    <form action="" method="post" class="px-2">
-                        <div class="mt-3 flex gap-4">
-                            <div class="w-full">
-                                <p>Name <span class="text-red-500">*</span></p>
-                                <input type="text" placeholder="Category Name" name="name"
-                                    class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                            </div>
-                        </div>
-                        <input type="submit"
-                            class="bg-primary font-semibold text-white w-full py-2 mt-4 text-center rounded-md"
-                            value="submit" name="submit">
-                        </input>
-                    </form>
+                                <tr>
+
+                                    <td>
+                                        <img src="../../images/user.png">
+                                        <a href="edit-request.php?id=<?php echo ($user['user_id']) ?>">
+                                            <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
+                                        </a>
+                                    </td>
+                                    <td><?php echo $user['email'] ?></td>
+                                    <td><?php echo $user['user_role'] ?></td>
+                                    <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
+                                    <td><span
+                                            class="status <?php echo $user['status'] ?>"><?php echo $user['status'] ?></span>
+                                    </td>
+
+
+                                </tr>
+
+                                <?php
+                            }
+                            ?>
+                        </tbody>
+                    </table>
                 </div>
-            </div>
 
+            </div>
         </main>
         <!-- MAIN -->
     </section>

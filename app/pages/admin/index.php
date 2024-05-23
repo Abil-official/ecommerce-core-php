@@ -37,12 +37,19 @@
 						<span class="text">Dashboard</span>
 					</a>
 				</li>
+			
 				<li>
-					<a href="approval-requests.php">
-						<i class='bx bxs-shopping-bag-alt'></i>
-						<span class="text">Users</span>
-					</a>
-				</li>
+                    <a href="traders.php">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Traders</span>
+                    </a>
+                </li>
+				<li class="">
+                    <a href="customers.php">
+                        <i class='bx bxs-shopping-bag-alt'></i>
+                        <span class="text">Customers</span>
+                    </a>
+                </li>
 				<li>
 					<a href="category/index.php">
 						<i class='bx bxs-shopping-bag-alt'></i>
