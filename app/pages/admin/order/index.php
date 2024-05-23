@@ -183,83 +183,48 @@ include "../../../connection.php";
         <main>
 
             <div class="table-data" style="grid-template-columns: none;">
-                <di class="order">
+                <div class="order">
                     <div class="head">
-                        <h3>Order Lists</h3>
+                        <h3></h3>
                     </div>
                     <table>
                         <thead>
                             <tr>
-                                <th>Full Name</th>
-                                <th>Email</th>
-                                <th>User Type </th>
-                                <th>Approval Status</th>
+                                <th>Invoice ID</th>
+                                <th>Quantity</th>
+                                <th>Totat Amount </th>
+                                <th>Created at</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
                             <?php
-                            $query = "
-                            SELECT 
-                            order_products.*
-                            FROM 
-                            order_products
-                            JOIN 
-                                products ON order_products.product_id = products.product_id
-                                JOIN 
-                                users ON  order_products.user_id = users.user_id
-                            WHERE 
-                                order_products.user_id = $userID
-                        ";
+                            $query = "SELECT * FROM `orders` WHERE `user_id` = '$userID'";
                             $result = mysqli_query($con, $query);
                             if ($result && mysqli_num_rows($result) > 0) {
                                 // echo "<form action='' method='post'>";
                                 while ($row = mysqli_fetch_assoc($result)) {
-                                    $productID = $row['product_id'];
+                                    ?>
 
-                                    var_dump($productID);
-
-                                    $query2 = "SELECT * FROM `products` WHERE `product_id`= '$productID'";
-                                    $result2 = mysqli_query($con, $query2);
-
-                                    while ($row2 = mysqli_fetch_assoc($result2)) {
-
-                                        ?>
-
-                                        <tr>
-
-                                            <td>
-                                                <img src="../../../images/user.png">
-                                                <a href="edit-request.php?id=<?php echo ($user['user_id']) ?>">
-                                                    <p><?php echo ($user['first_name'] . ' ' . $user['last_name']) ?></p>
-                                                </a>
-                                            </td>
-                                            <td><?php echo $user['email'] ?></td>
-                                            <td><?php echo $user['user_role'] ?></td>
-                                            <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
-                                            <td><span
-                                                    class="status <?php echo $user['status'] ?>"><?php echo $user['status'] ?></span>
-                                            </td>
+                                    <tr>
+                                        <td><?php echo $row['invoice_no'] ?></td>
+                                        <td><?php echo $row['total_amount'] ?></td>
+                                        <td><?php echo $row['order_quantity'] ?></td>
+                                        <!-- <td style="text-align: center;"><span class="Esewa">Esewa</span></td> -->
+                                        <td><span class="status approved"><?php echo $row['order_date'] ?></span>
+                                        </td>
 
 
-                                        </tr>
+                                    </tr>
 
-                                        <?php
-                                    }
+                                    <?php
                                 }
-                            } else {
-                                ?>
-                                <div class="flex justify-center mt-8 gap-4">
-                                    <div class="w-3/4 bg-red-100 p-4 rounded-md">
-                                        <p class="text-red-500">Not Any Cart Here</p>
-                                    </div>
-
-                                </div>
-
-                                <?php
                             }
                             ?>
                         </tbody>
                     </table>
+                </div>
+
             </div>
 
             </div>
