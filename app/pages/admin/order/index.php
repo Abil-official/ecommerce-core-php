@@ -181,6 +181,12 @@ include "../../../connection.php";
 
         <!-- MAIN -->
         <main>
+        <div class="head-title">
+                <div class="left">
+                    <h1>Order List</h1>
+                
+                </div>
+            </div>
 
             <div class="table-data" style="grid-template-columns: none;">
                 <div class="order">
@@ -198,7 +204,7 @@ include "../../../connection.php";
                         </thead>
                         <tbody>
                             <?php
-                            $query = "SELECT * FROM `orders` WHERE `user_id` = '$userID'";
+                            $query = "SELECT * FROM `orders`";
                             $result = mysqli_query($con, $query);
                             if ($result && mysqli_num_rows($result) > 0) {
                                 // echo "<form action='' method='post'>";
