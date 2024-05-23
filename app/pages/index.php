@@ -15,31 +15,82 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
     <link rel="stylesheet" href="../css/landing.css">
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/css/bootstrap.min.css" rel="stylesheet" />
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet" />
-    <style></style>
-    <script type="text/javascript" src=""></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script type="text/javascript" src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js"></script>
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
 
 <body>
-    <img src="../images/banner.png" alt="banner" class="banner">
+    <!-- Header -->
+    <header class="site-header sticky-top py-2" style="background-color: #A79277;">
+        <nav class="container d-flex flex-column flex-md-row justify-content-between">
+            <!-- Site Logo -->
+            <a href="/" class=" w-25 d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none d-flex justify-content-start">
+                <img src="../images/logo.jpg" alt="" srcset="" height="40px;">
+                <span class="fs-4 ms-2 text-white">Ecommerce Core</span>
+            </a>
+            <!-- Search -->
+            <form class="w-50 mx-auto">
+                <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+            </form>
 
-    <!-- Shopa -->
+            <!-- Profile -->
+            <div class="w-25 d-flex justify-content-end dropdown align-items-center">
+                <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" id="dropdownUser2" data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                </a>
+                <ul class="dropdown-menu text-small shadow" aria-labelledby="dropdownUser2" style="">
+                    <li><a class="dropdown-item" href="#">New project...</a></li>
+                    <li><a class="dropdown-item" href="#">Settings</a></li>
+                    <li><a class="dropdown-item" href="#">Profile</a></li>
+                    <li>
+                        <hr class="dropdown-divider">
+                    </li>
+                    <li><a class="dropdown-item" href="#">Sign out</a></li>
+                </ul>
+            </div>
+
+        </nav>
+    </header>
+
+    <!-- Banner -->
+    <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark d-flex justify-content-center align-items-center" style="background-image: url('../images/slider-bg.jpg');     background-repeat: no-repeat;
+    background-size: cover;
+    height: 600px;">
+
+        <div class="container">
+            <div class="detail-box w-50">
+                <h1>
+                    <span>
+                        Sale 20% Off
+                    </span>
+                    <br>
+                    On Everything
+                </h1>
+                <p>
+                    Explicabo esse amet tempora quibusdam laudantium, laborum eaque magnam fugiat hic? Esse dicta aliquid error repudiandae earum suscipit fugiat molestias, veniam, vel architecto veritatis delectus repellat modi impedit sequi.
+                </p>
+                <div class="read-more">
+                    <button class="view border-0 text-white" style="background-color: #A79277;">Shop Now</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Shop -->
     <section class="pt-5 pb-5">
         <div class="container">
-
             <div class="d-flex justify-content-center">
-            <h3 class="mb-3 text-center py-1 text-white px-5" style="background-color: #D1BB9E;">SHOPS</h3>
+                <h3 class="mb-3 text-center py-1 text-white px-5" style="background-color: #D1BB9E;">SHOPS</h3>
             </div>
-            
-             <div class="row">
-                <!-- Control -->
 
-                <!-- slider -->
+            <div class="row">
                 <div class="col-12">
+                    <!-- Control -->
                     <div class=" text-right">
                         <a class="btn btn-text-secondary mb-3 mr-1" href="#carouselExampleIndicators2" role="button" data-slide="prev">
                             <i class="fa fa-arrow-left"></i>
@@ -48,6 +99,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                             <i class="fa fa-arrow-right"></i>
                         </a>
                     </div>
+                    <!-- slider -->
                     <div id="carouselExampleIndicators2" class="carousel slide" data-ride="carousel--111111">
                         <div class="carousel-inner">
                             <div class="carousel-item active">
@@ -59,7 +111,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                                 <h4 class="card-title" style="font-size: 18px;">SHOPS 1</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati molestias sit reiciendis accusantium ab tenetur assumenda qui officiis consectetur?</p>
                                                 <div class="read-more text-center">
-                                                    <button class="view border-0 text-white" style="background-color: #A79277;">VIEW</button>
+                                                    <button class="view border-0 text-white" style="background-color: #A79277;">Shop Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -72,7 +124,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                                 <h4 class="card-title" style="font-size: 18px;">SHOPS 1</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati molestias sit reiciendis accusantium ab tenetur assumenda qui officiis consectetur?</p>
                                                 <div class="read-more text-center">
-                                                    <button class="view border-0 text-white" style="background-color: #A79277;">VIEW</button>
+                                                    <button class="view border-0 text-white" style="background-color: #A79277;">Shop Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -85,7 +137,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                                 <h4 class="card-title" style="font-size: 18px;">SHOPS 1</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati molestias sit reiciendis accusantium ab tenetur assumenda qui officiis consectetur?</p>
                                                 <div class="read-more text-center">
-                                                    <button class="view border-0 text-white" style="background-color: #A79277;">VIEW</button>
+                                                    <button class="view border-0 text-white" style="background-color: #A79277;">Shop Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -97,7 +149,7 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                                                 <h4 class="card-title" style="font-size: 18px;">SHOPS 1</h4>
                                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Molestiae obcaecati molestias sit reiciendis accusantium ab tenetur assumenda qui officiis consectetur?</p>
                                                 <div class="read-more text-center">
-                                                    <button class="view border-0 text-white" style="background-color: #A79277;">VIEW</button>
+                                                    <button class="view border-0 text-white" style="background-color: #A79277;">Shop Now</button>
                                                 </div>
                                             </div>
                                         </div>
@@ -182,46 +234,49 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
                         </div>
                     </div>
                 </div>
-        </div>
+            </div>
         </div>
     </section>
 
-    <!-- Shops -->
-    <div class="shop best">
-        <div class="seller">Products</div>
-        <div class="row">
-            <?php
-            foreach ($products ?? [] as $product) {
-            ?>
-                <div class="col-md-4">
-                    <a href="products/view.php?id=<?php echo ($product['product_id']) ?>">
-                        <div class="card mb-3">
-                            <?php
-                            $product_images = json_decode($product['product_image']) ?? [];
-                            foreach ($product_images ?? [] as $key => $image) {
-                                // Construct the image URL
-                                $image_url = '../' . htmlspecialchars($image);
-                            ?>
-                                <img src="<?php echo $image_url; ?>" class="card-img-top" alt="Product Image">
-                                <?php break; // Stop the loop after the first iteration 
+    <!-- Products -->
+    <div class="product best">
+        <div class="container">
+            <div class="d-flex justify-content-center">
+                <h3 class="mb-3 text-center py-1 text-white px-5" style="background-color: #D1BB9E;">Products</h3>
+            </div>
+            <div class="row">
+                <?php
+                foreach ($products ?? [] as $product) {
+                ?>
+                    <div class="col-md-4">
+                        <a href="products/view.php?id=<?php echo ($product['product_id']) ?>">
+                            <div class="card mb-3">
+                                <?php
+                                $product_images = json_decode($product['product_image']) ?? [];
+                                foreach ($product_images ?? [] as $key => $image) {
+                                    // Construct the image URL
+                                    $image_url = '../' . htmlspecialchars($image);
                                 ?>
-                            <?php } ?>
-                            <div class="card-body">
-                                <h5 class="card-title"><?php echo ($product['product_name']) ?> </h5>
-                                <p class="card-text">Price: $<?php echo ($product['price']) ?> </p>
+                                    <img src="<?php echo $image_url; ?>" class="card-img-top" alt="Product Image">
+                                    <?php break; // Stop the loop after the first iteration 
+                                    ?>
+                                <?php } ?>
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo ($product['product_name']) ?> </h5>
+                                    <p class="card-text">Price: $<?php echo ($product['price']) ?> </p>
 
-                                <div class="buttons-cart">
-                                    <button class="btn btn-primary" id="add-to-cart">Add to Cart</button>
+                                    <div class="buttons-cart">
+                                        <button class="btn btn-primary" id="add-to-cart">Add to Cart</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </a>
+                        </a>
 
-                </div>
-            <?php } ?>
+                    </div>
+                <?php } ?>
 
+            </div>
         </div>
-
     </div>
 
     <!-- Footer Section -->
@@ -299,6 +354,8 @@ $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
         </div>
     </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
 
 </html>
