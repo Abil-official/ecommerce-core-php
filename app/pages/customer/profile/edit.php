@@ -133,7 +133,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['profile_update'])) {
                 </a>
             </li>
             <li>
-                <a href="../../../logout.php" class="logout">
+                <a href="../../logout.php" class="logout">
                     <i class='bx bxs-log-out-circle'></i>
                     <span class="text">Logout</span>
                 </a>

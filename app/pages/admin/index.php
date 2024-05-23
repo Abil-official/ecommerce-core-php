@@ -37,19 +37,19 @@
 						<span class="text">Dashboard</span>
 					</a>
 				</li>
-			
+
 				<li>
-                    <a href="traders.php">
-                        <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Traders</span>
-                    </a>
-                </li>
+					<a href="traders.php">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Traders</span>
+					</a>
+				</li>
 				<li class="">
-                    <a href="customers.php">
-                        <i class='bx bxs-shopping-bag-alt'></i>
-                        <span class="text">Customers</span>
-                    </a>
-                </li>
+					<a href="customers.php">
+						<i class='bx bxs-shopping-bag-alt'></i>
+						<span class="text">Customers</span>
+					</a>
+				</li>
 				<li>
 					<a href="category/index.php">
 						<i class='bx bxs-shopping-bag-alt'></i>
@@ -112,7 +112,7 @@
 					</a>
 				</li>
 				<li>
-					<a href="#" class="logout">
+					<a href="../auth/log-out.php" class="logout">
 						<i class='bx bxs-log-out-circle'></i>
 						<span class="text">Logout</span>
 					</a>
@@ -159,15 +159,15 @@
 				<li>
 					<i class='bx bxs-dollar-circle'></i>
 					<span class="text">
-						<h3>$25431</h3>
+						<h3>$0</h3>
 						<p>Total Sales</p>
 					</span>
 				</li>
 				<li>
 					<i class='bx bxs-calendar-check'></i>
 					<span class="text">
-						<h3>1020</h3>
-						<p>New Order</p>
+						<h3>0</h3>
+						<p>Orders</p>
 					</span>
 				</li>
 			</ul>
@@ -182,9 +182,9 @@
 						<thead>
 							<tr>
 								<th>User</th>
-								<th>Date Order</th>
-								<th>Payment </th>
-								<th>Order Status</th>
+
+								<th>Total Orders </th>
+
 							</tr>
 						</thead>
 						<tbody>
@@ -194,8 +194,7 @@
 									<p>Preshna Adhikari</p>
 								</td>
 								<td>03-10-2024</td>
-								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-								<td><span class="status completed">Completed</span></td>
+
 							</tr>
 							<tr>
 								<td>
@@ -203,8 +202,7 @@
 									<p>Simran Shrestha</p>
 								</td>
 								<td>03-10-2024</td>
-								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-								<td><span class="status pending">Pending</span></td>
+
 							</tr>
 							<tr>
 								<td>
@@ -212,8 +210,7 @@
 									<p>Riya Shrestha</p>
 								</td>
 								<td>03-10-2024</td>
-								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-								<td><span class="status process">Process</span></td>
+
 							</tr>
 							<tr>
 								<td>
@@ -221,8 +218,7 @@
 									<p>Anshu Kharel</p>
 								</td>
 								<td>03-10-2024</td>
-								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-								<td><span class="status pending">Pending</span></td>
+
 							</tr>
 							<tr>
 								<td>
@@ -230,15 +226,14 @@
 									<p>Aseena Subedi</p>
 									<j /td>
 								<td>03-10-2024</td>
-								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
-								<td><span class="status completed">Completed</span></td>
+
 							</tr>
 						</tbody>
 					</table>
 				</div>
 				<div class="todo">
 					<div class="head">
-						<h3>Total Customers</h3>
+						<h3> Customers</h3>
 						<i class='bx bx-plus'></i>
 						<i class='bx bx-filter'></i>
 					</div>

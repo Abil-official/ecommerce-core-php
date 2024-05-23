@@ -120,7 +120,7 @@ if (isset($_SESSION['user_id']) && !empty($_SESSION['user_id'])) {
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="../auth/log-out.php" class="logout">
                         <i class='bx bxs-log-out-circle'></i>
                         <span class="text">Logout</span>
                     </a>
