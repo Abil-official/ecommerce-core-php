@@ -67,7 +67,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a href="./order/index.php">
                     <i class='bx bxs-shopping-bag-alt'></i>
                     <span class="text">My Order</span>
                 </a>
