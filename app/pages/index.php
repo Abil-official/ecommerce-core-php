@@ -6,7 +6,6 @@ $query = "SELECT * FROM `products`";
 $result = mysqli_query($con, $query);
 
 $products = mysqli_fetch_all($result, MYSQLI_ASSOC);
-var_dump($products);
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -7,7 +7,6 @@ session_start();
 if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
     $userID = $_SESSION['user_id'];
 
-var_dump($userID);
     $categories = null;
     $shops = null;
     $query = "SELECT * FROM `users` WHERE `user_id` = '$userID'";

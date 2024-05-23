@@ -26,7 +26,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         echo "No vegetable found with this ID.";
         exit;
     }
-    var_dump(isset($_SESSION['user_id']));
     if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
         $userID = $_SESSION['user_id'];
 

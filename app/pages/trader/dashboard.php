@@ -62,7 +62,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 				</li>
 				<li class="">
 					<a href="./profile/view.php">
-					<i class='bx bxl-product-hunt'></i>
+						<i class='bx bxl-product-hunt'></i>
 						<span class="text">Profile</span>
 					</a>
 				</li>
@@ -150,8 +150,8 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 				<li>
 					<i class='bx bxs-dollar-circle'></i>
 					<span class="text">
-						<h3>$25431</h3>
-						<p>Total Sales</p>
+						<h3>10</h3>
+						<p>Total Products</p>
 					</span>
 				</li>
 				<li>
@@ -167,12 +167,12 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 			<div class="table-data">
 				<div class="order">
 					<div class="head">
-						<h3>Top Five Traders</h3>
+						<h3>Orders</h3>
 					</div>
 					<table>
 						<thead>
 							<tr>
-								<th>User</th>
+
 								<th>Date Order</th>
 								<th>Payment </th>
 								<th>Order Status</th>
@@ -180,46 +180,31 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 						</thead>
 						<tbody>
 							<tr>
-								<td>
-									<img src="../../images/user.png">
-									<p>Preshna Adhikari</p>
-								</td>
+
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status completed">Completed</span></td>
 							</tr>
 							<tr>
-								<td>
-									<img src="../../images/user.png">
-									<p>Simran Shrestha</p>
-								</td>
+
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status pending">Pending</span></td>
 							</tr>
 							<tr>
-								<td>
-									<img src="../../images/user.png">
-									<p>Riya Shrestha</p>
-								</td>
+
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status process">Process</span></td>
 							</tr>
 							<tr>
-								<td>
-									<img src="../../images/user.png">
-									<p>Anshu Kharel</p>
-								</td>
+
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status pending">Pending</span></td>
 							</tr>
 							<tr>
-								<td>
-									<img src="../../images/user.png">
-									<p>Aseena Subedi</p>
-								</td>
+
 								<td>03-10-2024</td>
 								<td style="text-align: center;"><span class="Esewa">Esewa</span></td>
 								<td><span class="status completed">Completed</span></td>
@@ -229,7 +214,7 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 				</div>
 				<div class="todo">
 					<div class="head">
-						<h3>Total Customers</h3>
+						<h3>My Customers</h3>
 						<i class='bx bx-plus'></i>
 						<i class='bx bx-filter'></i>
 					</div>
