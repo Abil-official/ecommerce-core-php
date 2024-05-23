@@ -174,100 +174,66 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['order'])) {
                     }
                 }
                 ?>
-                <!-- model -->
-                <div
-                    class="w-full h-full hidden fixed px-5 py-5 bg-black bg-opacity-30 top-0 flex justify-center items-center model">
-                    <div class="px-3 py-3 top-0 bg-white rounded-md w-3/4">
-                        <div class="w-full">
-                            <div class="float-end close">
-                                <button class="btn">X</button>
+                <!-- cart -->
+                <div class="flex justify-center mt-8 gap-4">
+                    <div class="w-3/4 bg-green-100 p-4 rounded-md">
+                        <div class="">
+
+
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray">Tax</p>
+                                <p>£<span id="tax">5</span></p>
                             </div>
-                            <h1 class="font-semibold text-xl text-center">Information</h1>
-                            <div class="mt-4">
-                                <!-- <form action=""> -->
-                                <div class="mt-3 flex gap-4">
-                                    <input type="text" placeholder="First name"
-                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                                    <input type="text" placeholder="Last name"
-                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray">Sub-Total</p>
+                                <p>£<span id="sub-total">0</span></p>
+                            </div>
+                            <div class="border-b-2 border-gray-400 mt-4 mb-2"></div>
+                            <div class="flex justify-between items-center">
+                                <p class="font-semibold text-gray">Total</p>
+                                <p>£<span id="total">0</span></p>
+                            </div>
+                        </div>
+                        <div class="border-b-2 border-gray-400 mt-2"></div>
+                        <div class="">
+                            <div class="flex gap-4 mt-8">
+                                <div class="w-full">
+                                    <button type="submit" class="bg-primary py-2 font-semibold rounded-md text-white w-full"
+                                        id="add-to-cart" name="order">
+                                        Order
+                                    </button>
                                 </div>
-
-                                <div class="mt-1">
-                                    <input type="email" placeholder="Email address"
-                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                                </div>
-
-                                <div class="mt-1">
-                                    <input type="text" placeholder="Contact"
-                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                                </div>
-                                <div class="mt-1">
-                                    <input type="text" placeholder="Address"
-                                        class="px-4 py-2 rounded-md mt-2 bg-transparent border border-gray-500 outline-none w-full" />
-                                </div>
-
-                                <button class="bg-primary font-bold text-white w-full py-2 mt-4 text-center rounded-md"
-                                    type="submit" name="order">
-                                    Order
-                                </button>
-                                <!-- </form> -->
                             </div>
                         </div>
                     </div>
                 </div>
-                <!-- end model -->
                 <?php
 
                 echo "</form>";
             } else {
                 ?>
-                <p>not cart</p>
-                <?php
+                <div class="flex justify-center mt-8 gap-4">
+                    <div class="w-3/4 bg-red-100 p-4 rounded-md">
+                        <p class="text-red-500">Not Any Cart Here</p>
+                    </div>
+
+                </div>
+            </div>
+            <?php
             }
             ?>
 
 
-            <!-- cart -->
-            <div class="flex justify-center mt-8 gap-4">
-                <div class="w-3/4 bg-green-100 p-4 rounded-md">
-                    <div class="">
 
 
-                        <div class="flex justify-between items-center">
-                            <p class="font-semibold text-gray">Tax</p>
-                            <p>£<span id="tax">5</span></p>
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-semibold text-gray">Sub-Total</p>
-                            <p>£<span id="sub-total">0</span></p>
-                        </div>
-                        <div class="border-b-2 border-gray-400 mt-4 mb-2"></div>
-                        <div class="flex justify-between items-center">
-                            <p class="font-semibold text-gray">Total</p>
-                            <p>£<span id="total">0</span></p>
-                        </div>
-                    </div>
-                    <div class="border-b-2 border-gray-400 mt-2"></div>
-                    <div class="">
-                        <div class="flex gap-4 mt-8">
-                            <div class="w-full">
-                                <button class="bg-primary py-2 font-semibold rounded-md text-white w-full"
-                                    id="add-to-cart">
-                                    Checkout
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="flex justify-center mt-8">
-                <div class="w-3/4">
-                    <a href="#" class="text-gray font-semibold"><i class="fa-solid fa-arrow-left"></i> Back to cart</a>
-                </div>
+        <div class="flex justify-center mt-8">
+            <div class="w-3/4">
+                <a href="../../index.php" class="text-gray font-semibold"><i class="fa-solid fa-arrow-left"></i>
+                    Back to cart</a>
             </div>
         </div>
-        <!-- end content -->
+    </div>
+    <!-- end content -->
     </div>
 
     <!-- {{-- footer --}} -->
