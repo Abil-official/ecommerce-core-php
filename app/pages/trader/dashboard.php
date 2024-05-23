@@ -61,15 +61,15 @@ if (isset($_SESSION['user_id']) || !empty($_SESSION['user_id'])) {
 					</a>
 				</li>
 				<li class="">
-<<<<<<< HEAD
 					<a href="./profile/view.php">
-						<i class='bx bxs-dashboard'></i>
+					<i class='bx bxl-product-hunt'></i>
 						<span class="text">Profile</span>
-=======
+					</a>
+				</li>
+				<li class="">
 					<a href="shop/index.php">
 						<i class='bx bxs-dashboard'></i>
 						<span class="text">Shop</span>
->>>>>>> 2f12a153dc77d2b40eb367a114f427d468583902
 					</a>
 				</li>
 				<li>
